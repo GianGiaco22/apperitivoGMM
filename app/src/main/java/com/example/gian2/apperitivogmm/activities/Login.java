@@ -3,7 +3,6 @@ package com.example.gian2.apperitivogmm.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,18 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.helper.InputValidation;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity;
@@ -117,7 +107,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //se l'username inserito è esatto
         if(databaseHelper.checkCameriere(username.getText().toString().trim())){
             //accedo alla pagina di gestione
-            Intent accedi_area=new Intent(activity,UserActivity.class);
+            Intent accedi_area=new Intent(activity,CameriereActivity.class);
             //passo a tale pagina il valore dell'username
             accedi_area.putExtra("USERNAME",username.getText().toString().trim());
 

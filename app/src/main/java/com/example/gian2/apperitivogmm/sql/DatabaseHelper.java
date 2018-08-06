@@ -7,6 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.gian2.apperitivogmm.model.Cameriere;
+import com.example.gian2.apperitivogmm.model.Ingrediente;
+import com.example.gian2.apperitivogmm.model.Ordine;
+import com.example.gian2.apperitivogmm.model.Pietanza;
+import com.example.gian2.apperitivogmm.model.Pietanza_Ordinata;
+import com.example.gian2.apperitivogmm.model.Tavolo;
 
 /**
  * Created by gian2 on 31/07/2018.
@@ -34,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             ")";
 
     private String CREATE_TABLE_ORDINE="CREATE TABLE ordine(\n" +
-            "  codice int not null primary key,\n" +
+            "  codice int not auto_increment null primary key,\n" +
             "  tavolo int references tavolo(numero)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
@@ -89,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             ")";
 
+
     private String DROP_TABLE="DROP IF EXISTS "+TABLE_CAMERIERE;
 
     @Override
@@ -103,6 +109,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_CREA);
         db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
+        for (int i=1;i<12;i++){
+            Tavolo t=new Tavolo();
+            t.setNumero(i);
+            addTavolo(t);
+        }
 
 
     }
@@ -150,4 +161,111 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         return false;
     }
+
+
+    //inserisco una pietanza
+    public void addPietanza(Pietanza pietanza){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("nome",pietanza.getNome());
+        values.put("descrizione",pietanza.getDescrizione());
+        values.put("costo",pietanza.getPrezzo());
+        values.put("categoria",pietanza.getCategoria());
+
+        db.insert("pietanza",null,values);
+
+    }
+
+    //inserisco un ordine
+    public void addOrdine(Ordine ordine){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("codice",ordine.getCodice());
+        values.put("tavolo",ordine.getTavolo());
+        values.put("cameriere",ordine.getCameriere().getUsername());
+
+
+        db.insert("ordine",null,values);
+    }
+
+    //inserisco nuovo ingrediente
+    public void addIngrediente(Ingrediente ingrediente){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("nome",ingrediente.getNome());
+        db.insert("ingrediente",null,values);
+    }
+
+    //aggiungo un tavolo
+    public void addTavolo(Tavolo tavolo){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("numero",tavolo.getNumero());
+        db.insert("tavolo",null,values);
+    }
+
+    //aggiungo pietanza ad un ordine
+    public void addComposto(Ordine ordine,Pietanza_Ordinata pietanza_ordinata){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("ordine",ordine.getCodice());
+        values.put("pietanza_ordinata",pietanza_ordinata.getCodice());
+        db.insert("composto",null,values);
+    }
+
+    //aggiungo pietanza_ordinata (che può avere ingredienti aggiuntivi)
+    public void addPietanzaOrdinata(Pietanza pietanza,int codice){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("codice",codice);
+        values.put("pietanza",pietanza.getNome());
+        db.insert("pietanza_ordinata",null,values);
+    }
+
+    //aggiungo record a tabella crea( ingredienti usati per una pietanza)
+    public void addCrea(Pietanza pietanza,Ingrediente ingrediente,int quantita){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("pietanza",pietanza.getNome());
+        values.put("ingrediente",ingrediente.getNome());
+        values.put("quantita",ingrediente.getNome());
+        db.insert("crea",null,values);
+    }
+
+    //aggiungo la possibile aggiunta che una persona ha fatto nella sua pietanza ordinata
+    public void addAggiunto(Pietanza_Ordinata pietanza_ordinata,Ingrediente ingrediente,int costo){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
+        values.put("pietanza_ordinata",pietanza_ordinata.getCodice());
+        values.put("ingrediente",ingrediente.getNome());
+        values.put("costo",costo);
+        db.insert("aggiunto",null,values);
+    }
+
+
+    //ricerco se un ordine esiste
+    public boolean checkOrdine(int codice){
+        String[] columns={
+                "codice"
+        };
+        SQLiteDatabase db=this.getWritableDatabase();
+        String selection="codice"+" = ?";
+        //
+        String[] selectionArgs={ ""+codice };
+        Cursor cursor=db.query("ordine",columns,selection,selectionArgs,null,null,null);
+        //conto i camerieri trovati
+        int ordini_trovati=cursor.getCount();
+        cursor.close();
+        //se ho trovato il cameriere cercato
+        if(ordini_trovati>0){
+            return true;
+        }
+        return false;
+
+    }
+
+
+
+
+
 }

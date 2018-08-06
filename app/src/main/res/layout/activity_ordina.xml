@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="18px"
+    android:paddingRight="18px"
+    android:background="#000000"
+    tools:context="com.example.gian2.apperitivogmm.activities.Login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10px"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="#FFF"
+            android:id="@+id/titolo"
+            android:textSize="20dp"
+            />
+
+        <Button
+            android:layout_marginTop="40dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/buttonstyleselector"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:text="Antipasti"
+            android:id="@+id/antipasti"/>
+
+        <Button
+            android:layout_marginTop="40dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/buttonstyleselector"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:text="Secondi"
+            android:id="@+id/secondi"/>
+
+        <Button
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="-200dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/buttonstyleselector"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:text="Primi"
+            android:id="@+id/primi"/>
+
+        <Button
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
+            android:background="@drawable/buttonstyleselector"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:text="Dolci"
+            android:id="@+id/dolci"/>
+
+        <Button
+
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonstyleselector"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:text="Visualizza ordine"
+            android:id="@+id/visualizza_ordine"/>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
