@@ -26,20 +26,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COlUMN_NOME="nome";
     private static final String COlUMN_COGNOME="cognome";
     private static final String COlUMN_NUM_TELEFONO="num_telefono";
-    private  String CREATE_CAMERIERE_TABLE="CREATE TABLE "+TABLE_CAMERIERE+"("+
+    private  String CREATE_CAMERIERE_TABLE="CREATE TABLE if not exists  "+TABLE_CAMERIERE+"("+
             COLUMN_USERNAME+" varchar(100) not null primary key, "+COlUMN_NOME+" varchar(50) not null, "+
             COlUMN_COGNOME+" varchar(50) not null, "+COlUMN_NUM_TELEFONO+" varchar(10) not null)";
 
-    private String CREATE_TABLE_INGREDIENTE="CREATE TABLE ingrediente(" +
+    private String CREATE_TABLE_INGREDIENTE="CREATE TABLE if not exists ingrediente(" +
             "  nome varchar(50) not null primary key);" +
             ")";
 
-    private String CREATE_TABLE_TAVOLO="CREATE TABLE tavolo(" +
+    private String CREATE_TABLE_TAVOLO="CREATE TABLE if not exists tavolo(" +
             "  numero int not null primary key" +
             ")";
 
-    private String CREATE_TABLE_ORDINE="CREATE TABLE ordine(\n" +
-            "  codice int not auto_increment null primary key,\n" +
+    private String CREATE_TABLE_ORDINE="CREATE TABLE if not exists ordine(\n" +
+            "  codice int auto_increment not null primary key,\n" +
             "  tavolo int references tavolo(numero)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
@@ -48,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete no action\n" +
             ")";
 
-    private String CREATE_TABLE_COMPOSTO="create table composto(\n" +
+    private String CREATE_TABLE_COMPOSTO="create table if not exists composto(\n" +
             "  pietanza_ordinata int  references pietanza_ordinata(codice)\n" +
             "  on delete no action\n" +
             "  on update cascade,\n" +
@@ -57,32 +57,33 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete no action,\n" +
             "  primary key(pietanza_ordinata,ordine)\n" +
             ")";
-    private String CREATE_TABLE_CREA="create table crea(\n" +
+    private String CREATE_TABLE_CREA="create table if not exists crea(\n" +
             "  pietanza varchar(50)  references pietanza(nome)\n" +
             "  on delete no action\n" +
             "  on update cascade,\n" +
             "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
-            "  primary key(pietanza,ingrediente),\n" +
-            "  quantita int not null\n" +
+            "  quantita integer not null,\n" +
+            "  primary key(pietanza,ingrediente)\n" +
+
             ")";
 
-    private String CREATE_TABLE_PIETANZA="create table pietanza(\n" +
+    private String CREATE_TABLE_PIETANZA="create table if not exists pietanza(\n" +
             "  nome varchar(50) not null primary key,\n" +
             "  categoria varchar(50) not null,\n" +
             "  costo float not null,\n" +
             "  descrizione varchar(200) not null\n" +
             ")";
 
-    private String CREATE_TABLE_PIETANZA_ORDINATA="create table pietanza_ordinata(\n" +
+    private String CREATE_TABLE_PIETANZA_ORDINATA="create table if not exists pietanza_ordinata(\n" +
             "  codice int not null primary key,\n" +
             "  pietanza varchar(50) references pietanza(nome)\n" +
             "  on update cascade\n" +
             "  on delete cascade\n" +
             ")";
 
-    private String CREATE_TABLE_AGGIUNTO="create table aggiunto( \n" +
+    private String CREATE_TABLE_AGGIUNTO="create table if not exists aggiunto( \n" +
             "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
@@ -95,7 +96,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             ")";
 
 
-    private String DROP_TABLE="DROP IF EXISTS "+TABLE_CAMERIERE;
+
+
+    private String DROP_TABLE="";
 
     @Override
     public void onCreate(SQLiteDatabase db){
@@ -114,6 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             t.setNumero(i);
             addTavolo(t);
         }
+
 
 
     }
@@ -176,16 +180,23 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     }
 
+    public void inserisciPietanze(String pietanze){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.execSQL(pietanze);
+    }
+
     //inserisco un ordine
     public void addOrdine(Ordine ordine){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put("codice",ordine.getCodice());
         values.put("tavolo",ordine.getTavolo());
-        values.put("cameriere",ordine.getCameriere().getUsername());
+        values.put("cameriere",ordine.getCameriere());
 
 
-        db.insert("ordine",null,values);
+        db.insertOrThrow("ordine",null,values);
+
+
     }
 
     //inserisco nuovo ingrediente
@@ -263,6 +274,50 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return false;
 
     }
+
+    //ricerco ultimo codice dell'ordine inserito
+    public int cercaUltimoCodiceOrdine(){
+        String[] columns={
+                "MAX(codice) AS max_codice"
+        };
+        SQLiteDatabase db=this.getWritableDatabase();
+        Cursor cursor=db.query("ordine",columns,null,null,null,null,null);
+
+        if(cursor.moveToFirst()){
+            int max_codice=cursor.getInt((int)cursor.getColumnIndex("max_codice"));
+            cursor.close();
+            return max_codice;
+        }
+        cursor.close();
+        //in caso  non esista nessun ordine inserito, inserisco al primo ordine il valore del codice ad 1
+        return 1;
+
+    }
+
+    //ottengo i piatti di una determinata categoria
+    /*public Pietanza[] ottieniPiattiTipologia(String[] categoria) {
+        Pietanza[] piatti = new Pietanza[10];
+        String[] columns = {
+                "nome",
+                "costo",
+                "descrizione",
+                "categoria"
+
+
+        };
+        String selection = "categoria" + " = ?";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query("pietanza", columns, selection, categoria, null, null, "nome");
+        if (cursor.moveToFirst()) {
+            int i = 0;
+            while (!cursor.isAfterLast()) {
+                piatti[i] = new Pietanza();
+
+            }
+        }
+
+    }*/
+
 
 
 

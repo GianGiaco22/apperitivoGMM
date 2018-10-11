@@ -35,6 +35,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
     private Button tavolo11;
     private Button tavolo12;
     private DatabaseHelper databaseHelper;
+    private String usernameFromIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,7 +43,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_user);
 
         vedi_username=(TextView) findViewById(R.id.vedi);
-        String usernameFromIntent=getIntent().getStringExtra("USERNAME");
+         usernameFromIntent=getIntent().getStringExtra("USERNAME");
         vedi_username.setText(" Benvenuto "+usernameFromIntent+", seleziona il tavolo :");
 
         initViews();
@@ -162,6 +163,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         Intent intent=new Intent(getApplicationContext(),OrdinaActivity.class);
         //passo all'activity successiva il dato relativo al tavolo da cui ho ricevuto un ordine
         intent.putExtra("Tavolo",tavolo.getNumero());
+        intent.putExtra("Cameriere_usrnm",usernameFromIntent);
         //faccio partire intent
         startActivity(intent);
 
