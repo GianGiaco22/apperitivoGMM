@@ -137,7 +137,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
        tavolo=getIntent().getIntExtra("Tavolo",0);
        utente=getIntent().getStringExtra("Cameriere_usrnm").toString().trim();
        ordine=new Ordine();
-
        ordine.setCameriere(getIntent().getStringExtra("Cameriere_usrnm").toString().trim());
        ordine.setTavolo(tavolo);
 

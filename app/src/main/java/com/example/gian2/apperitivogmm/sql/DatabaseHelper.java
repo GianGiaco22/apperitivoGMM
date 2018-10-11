@@ -112,11 +112,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_CREA);
         db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
-        for (int i=1;i<12;i++){
+        /*for (int i=1;i<12;i++){
             Tavolo t=new Tavolo();
             t.setNumero(i);
             addTavolo(t);
-        }
+        }*/
 
 
 
@@ -315,12 +315,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             }
         }
+        }*/
 
-    }*/
-
-
-
+    }
 
 
 
-}
+
+
+
+
