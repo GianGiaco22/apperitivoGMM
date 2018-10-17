@@ -115,11 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_CREA);
         db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
-        for (int i=1;i<=12;i++){
-            Tavolo t=new Tavolo();
-            t.setNumero(i);
-            addTavolo(t);
-        }
+
 
     }
 
@@ -224,8 +220,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void addTavolo(Tavolo tavolo){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put("numero",tavolo.getNumero());
-        db.insert("tavolo",null,values);
+        String[] columns={
+                "numero"
+        };
+        String selection="numero = ?";
+        String numero=""+tavolo.getNumero();
+        String[] selectionArgs={numero};
+        Cursor cursor=db.query("tavolo",columns,selection,selectionArgs,null,null,null);
+        if(cursor.getCount()==0){
+            int pietanza_inserita=cursor.getCount();
+            values.put("numero",tavolo.getNumero());
+            db.insert("tavolo",null,values);
+        }
+
     }
 
     //aggiungo pietanza ad un ordine

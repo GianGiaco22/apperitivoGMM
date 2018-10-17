@@ -12,6 +12,7 @@ import com.example.gian2.apperitivogmm.helper.InputValidation;
 import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.model.Pietanza;
+import com.example.gian2.apperitivogmm.model.Tavolo;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
 /**
@@ -41,6 +42,11 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         initListeners();
         initObjects();
         initViews();
+        for (int i=1;i<=12;i++){
+            Tavolo t=new Tavolo();
+            t.setNumero(i);
+            databaseHelper.addTavolo(t);
+        }
         Pietanza[] menu=new Pietanza[28];
         for(int i=0;i<28;i++){
             menu[i]=new Pietanza();
