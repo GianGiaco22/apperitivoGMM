@@ -121,8 +121,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             addTavolo(t);
         }
 
-
-
     }
 
     @Override
@@ -189,10 +187,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             values.put("costo",pietanza.getPrezzo());
             values.put("categoria",pietanza.getCategoria());
             db.insert("pietanza",null,values);
+        }else{
+            //altrimenti nulla
         }
-
-
-
 
     }
 
