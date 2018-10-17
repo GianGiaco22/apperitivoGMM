@@ -42,10 +42,11 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         initObjects();
         initViews();
         Pietanza[] menu=new Pietanza[28];
-        for(int i=1;i<28;i++){
+        for(int i=0;i<28;i++){
             menu[i]=new Pietanza();
         }
-/*        menu[0].setDescrizione("spagheti con vongole veraci e prezzemolo");
+        menu[0].setCategoria("primo");
+        menu[0].setDescrizione("spaghetti con vongole veraci e prezzemolo");
         menu[0].setNome("Spaghetti con le vongole");
         menu[0].setPrezzo(9.5f);
         menu[1].setCategoria("primo");
@@ -68,8 +69,9 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         menu[5].setDescrizione("gnocchi con salsa di pomodoro");
         menu[5].setNome("Gnocchi al pomodoro");
         menu[5].setPrezzo(8f);
-
-
+        for(int i=0;i<6;i++){
+            databaseHelper.addPietanza(menu[i]);
+        }
         menu[1].setCategoria("secondo");
         menu[1].setDescrizione("tartare con verdure di stagione");
         menu[1].setNome("Tartare di verdure");
@@ -95,11 +97,9 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         }
         titolo.setText("Ordine al tavolo "+tavolo+" dal cameriere "+utente);
         ordine.setCodice(databaseHelper.cercaUltimoCodiceOrdine()+1);
-        databaseHelper.inserisciPietanze("INSERT INTO pietanza (nome,categoria,descrizione,costo)\n" +
+        databaseHelper.inserisciPietanze("INSERT OR IGNORE INTO pietanza (nome,categoria,descrizione,costo)\n" +
                 "VALUES "+
                 "" +
-
-
                 "('Tris di formaggi e affettati','antipasto','formaggi e affettati di stagione',9),\n" +
                 "('Vongole saltate con crostino','antipasto','vongole pescated oggi',6),\n" +
                 "('Antipasto vegetariano','antipasto','verdure di stagione',6),\n" +
@@ -115,7 +115,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 "('Acqua naturale','bevanda','bottiglia da 0.75',2.50),\n" +
                 "('Acqua gassata','bevanda','bottiglia da 0.75',2.50),\n" +
                 "('Caffe','bevanda','caffe classico',1.50),\n" +
-                "('Grappa della casa','bevanda','grappa fatta in casa',3);\n");*/
+                "('Grappa della casa','bevanda','grappa fatta in casa',3);\n");
     }
 
     @Override

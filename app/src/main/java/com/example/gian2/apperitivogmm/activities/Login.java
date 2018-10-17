@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
 }
-    /*
+/*
     public void login(){
         //utilizzo libreria volley
         //vado a richiedere utilizzo del file login.php , attraverso una richiesta HTTP
@@ -162,5 +162,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         //eseguo l'oggetto StringRequest request
         Volley.newRequestQueue(this).add(request);
     }
+*/
 
-    */

@@ -13,6 +13,9 @@ import com.example.gian2.apperitivogmm.model.Pietanza;
 import com.example.gian2.apperitivogmm.model.Pietanza_Ordinata;
 import com.example.gian2.apperitivogmm.model.Tavolo;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by gian2 on 31/07/2018.
  */
@@ -112,11 +115,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_CREA);
         db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
-        /*for (int i=1;i<12;i++){
+        for (int i=1;i<=12;i++){
             Tavolo t=new Tavolo();
             t.setNumero(i);
             addTavolo(t);
-        }*/
+        }
 
 
 
@@ -171,12 +174,25 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public void addPietanza(Pietanza pietanza){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put("nome",pietanza.getNome());
-        values.put("descrizione",pietanza.getDescrizione());
-        values.put("costo",pietanza.getPrezzo());
-        values.put("categoria",pietanza.getCategoria());
+        //controllo di non aver già inserito tale pietanza
+        String[] columns={
+                "nome"
+        };
+        String selection="nome = ?";
+        String[] selectionArgs={ pietanza.getNome() };
+        Cursor cursor=db.query("pietanza",columns,selection,selectionArgs,null,null,null);
+        int pietanza_inserita=cursor.getCount();
+        //se non ho nessuna pietanza con tale nome, la inserisco
+        if(pietanza_inserita==0){
+            values.put("nome",pietanza.getNome());
+            values.put("descrizione",pietanza.getDescrizione());
+            values.put("costo",pietanza.getPrezzo());
+            values.put("categoria",pietanza.getCategoria());
+            db.insert("pietanza",null,values);
+        }
 
-        db.insert("pietanza",null,values);
+
+
 
     }
 
