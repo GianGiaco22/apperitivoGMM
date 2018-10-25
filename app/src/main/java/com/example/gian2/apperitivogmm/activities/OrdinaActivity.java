@@ -120,6 +120,12 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 "('Acqua gassata','bevanda','bottiglia da 0.75',2.50),\n" +
                 "('Caffe','bevanda','caffe classico',1.50),\n" +
                 "('Grappa della casa','bevanda','grappa fatta in casa',3);\n");
+        String[] categorie={"antipasto","primo","secondo","bevanda","dolce"};
+        for(int i=0; i<5; i++){
+            show_dishes(categorie[i]);
+        }
+
+
     }
 
     @Override
