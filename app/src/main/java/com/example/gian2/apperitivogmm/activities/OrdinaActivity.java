@@ -1,11 +1,14 @@
 package com.example.gian2.apperitivogmm.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.helper.InputValidation;
