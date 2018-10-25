@@ -337,6 +337,22 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }
         }*/
 
+
+    //metodo per visualizzare pietanze in base alla tipologia
+    public Cursor vedi_pietanze(String categoria){
+        String[] columns={
+                "nome",
+                "costo",
+                "descrizione",
+                "categoria"
+        };
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selection="categoria= ?";
+        String selectionArgs[]={categoria};
+        Cursor cursor=db.query("pietanza",columns,selection,selectionArgs,null,null,null);
+        return cursor;
+    }
+
     }
 
 
