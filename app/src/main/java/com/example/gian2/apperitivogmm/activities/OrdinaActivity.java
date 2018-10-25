@@ -23,11 +23,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
 
     private final AppCompatActivity ordinaActivity= OrdinaActivity.this;
     private TextView titolo;
-    private Button antipasti;
-    private Button primi;
-    private Button secondi;
-    private Button dolci;
-    private Button visualizza_ordine;
     private DatabaseHelper databaseHelper;
     private InputValidation inputValidation;
     private Cameriere cameriere=new Cameriere();
@@ -127,7 +122,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view){
         switch(view.getId()){
-            case R.id.antipasti:
+
 
         }
     }
@@ -135,11 +130,8 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     private void initViews(){
 
        titolo=(TextView) findViewById(R.id.titolo);
-       antipasti=(Button) findViewById(R.id.antipasti);
-       primi=(Button) findViewById(R.id.primi);
-       secondi=(Button) findViewById((R.id.secondi));
-       dolci=(Button) findViewById(R.id.dolci);
-       visualizza_ordine=(Button) findViewById(R.id.visualizza_ordine);
+
+
        tavolo=getIntent().getIntExtra("Tavolo",0);
        utente=getIntent().getStringExtra("Cameriere_usrnm").toString().trim();
        ordine=new Ordine();

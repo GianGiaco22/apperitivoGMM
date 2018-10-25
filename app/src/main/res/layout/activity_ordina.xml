@@ -23,58 +23,6 @@
             android:textSize="20dp"
             />
 
-        <Button
-            android:layout_marginTop="40dp"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Antipasti"
-            android:id="@+id/antipasti"/>
-
-        <Button
-            android:layout_marginTop="40dp"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Secondi"
-            android:id="@+id/secondi"/>
-
-        <Button
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="-200dp"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Primi"
-            android:id="@+id/primi"/>
-
-        <Button
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="40dp"
-            android:layout_width="150dp"
-            android:layout_height="80dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Dolci"
-            android:id="@+id/dolci"/>
-
-        <Button
-
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#FFFFFF"
-            android:textSize="20dp"
-            android:text="Visualizza ordine"
-            android:id="@+id/visualizza_ordine"/>
 
 
 
