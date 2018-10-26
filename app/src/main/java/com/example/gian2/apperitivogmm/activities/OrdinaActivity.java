@@ -167,11 +167,13 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
             TextView[] pietanze=new TextView[cursor.getCount()];
             cursor.moveToFirst();
             TextView categoria_vedi=new TextView(this);
+            categoria_vedi.setTextColor(getResources().getColor(R.color.ic_launcher_background));
+            categoria_vedi.setText("\n"+categoria.toUpperCase()+"\n");
             ((LinearLayout) this.findViewById(R.id.pietanze)).addView(categoria_vedi);
             for(int i=0; i<cursor.getCount();i++){
                 pietanze[i]=new TextView(this);
                 pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
-                pietanze[i].setText(cursor.getString(0)+cursor.getString(1)+cursor.getString(2));
+                pietanze[i].setText(cursor.getString(0)+"  €"+cursor.getString(1)+"\nDescrizione : "+cursor.getString(2)+"\n");
                 ((LinearLayout) this.findViewById(R.id.pietanze)).addView(pietanze[i]);
                 cursor.moveToNext();
 
