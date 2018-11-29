@@ -67,6 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  ordine int not null references ordine(codice)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
+            "  quantita_pietanza int not null,\n " +
             "  primary key(pietanza_ordinata,ordine)\n" +
             ")";
 
