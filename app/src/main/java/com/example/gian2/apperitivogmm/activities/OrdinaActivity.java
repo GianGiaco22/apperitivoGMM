@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -162,19 +164,38 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     //metodo per visualizzare le diverse pietanze
     private void show_dishes(String categoria){
         Cursor cursor=databaseHelper.vedi_pietanze(categoria);
-
+        //vedo pietanze di una determinata categoria
         if(cursor.getCount()>0){
+            //creo textTiew per vedere la pietanza
             TextView[] pietanze=new TextView[cursor.getCount()];
+            //creo edit text per visualizzare quantità di ogni piatto ordinato
+            EditText[] conta_pietanze=new EditText[cursor.getCount()];
+            //array vai al primo elemento
             cursor.moveToFirst();
+            //creo textview per vedere la categoria
             TextView categoria_vedi=new TextView(this);
+            //grafica scritte
             categoria_vedi.setTextColor(getResources().getColor(R.color.ic_launcher_background));
             categoria_vedi.setText("\n"+categoria.toUpperCase()+"\n");
+            //visulaizzo sul layout il nome della categoria
             ((LinearLayout) this.findViewById(R.id.pietanze)).addView(categoria_vedi);
+            //visualizzo ogni textview dei piatti
             for(int i=0; i<cursor.getCount();i++){
                 pietanze[i]=new TextView(this);
+                conta_pietanze[i]=new EditText(this);
                 pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
+                conta_pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
+                //vedo in ordine : Titolo, prezzo, descrizione
                 pietanze[i].setText(cursor.getString(0)+"  €"+cursor.getString(1)+"\nDescrizione : "+cursor.getString(2)+"\n");
+                //creo tale Edittext come solo edit text numerica
+                conta_pietanze[i].setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                //inserisci edittext per ogni pietanza per inserirne la quantità
+                ((LinearLayout) this.findViewById(R.id.pietanze)).addView(conta_pietanze[i]);
+                //inserisci tale textview della pietanza nel layout
                 ((LinearLayout) this.findViewById(R.id.pietanze)).addView(pietanze[i]);
+
+                //muovo cursor a prossima pietanza
                 cursor.moveToNext();
 
             }
