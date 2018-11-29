@@ -168,17 +168,22 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         if(cursor.getCount()>0){
             //creo textTiew per vedere la pietanza
             TextView[] pietanze=new TextView[cursor.getCount()];
-            //creo edit text per visualizzare quantità di ogni piatto ordinato
+
+            //creo edit text per inserire e visualizzare quantità di ogni piatto ordinato
             EditText[] conta_pietanze=new EditText[cursor.getCount()];
+
             //array vai al primo elemento
             cursor.moveToFirst();
+
             //creo textview per vedere la categoria
             TextView categoria_vedi=new TextView(this);
             //grafica scritte
             categoria_vedi.setTextColor(getResources().getColor(R.color.ic_launcher_background));
             categoria_vedi.setText("\n"+categoria.toUpperCase()+"\n");
-            //visulaizzo sul layout il nome della categoria
+
+            //visualizzo sul layout il nome della categoria
             ((LinearLayout) this.findViewById(R.id.pietanze)).addView(categoria_vedi);
+
             //visualizzo ogni textview dei piatti
             for(int i=0; i<cursor.getCount();i++){
                 pietanze[i]=new TextView(this);
@@ -186,11 +191,12 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
                 conta_pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
                 //vedo in ordine : Titolo, prezzo, descrizione
-                pietanze[i].setText(cursor.getString(0)+"  €"+cursor.getString(1)+"\nDescrizione : "+cursor.getString(2)+"\n");
-                //creo tale Edittext come solo edit text numerica
+                pietanze[i].setText(cursor.getString(0)+"  € "+cursor.getString(1)+"\nDescrizione : "+cursor.getString(2)+"\n");
+
+                //creo tale Edit_text come edit text solo numerica
                 conta_pietanze[i].setInputType(InputType.TYPE_CLASS_NUMBER);
 
-                //inserisci edittext per ogni pietanza per inserirne la quantità
+                //inserisci edit_text per ogni pietanza per inserirne la quantità
                 ((LinearLayout) this.findViewById(R.id.pietanze)).addView(conta_pietanze[i]);
                 //inserisci tale textview della pietanza nel layout
                 ((LinearLayout) this.findViewById(R.id.pietanze)).addView(pietanze[i]);
@@ -200,7 +206,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         }else{
-            Toast.makeText(ordinaActivity, "nulla", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ordinaActivity, "Nessuna voce selezionata!", Toast.LENGTH_SHORT).show();
         }
     }
 

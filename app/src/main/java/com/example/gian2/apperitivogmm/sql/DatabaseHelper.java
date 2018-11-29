@@ -23,24 +23,32 @@ import java.util.Set;
 public class DatabaseHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION=1 ;
     private static final String DATABASE_NAME="appgmm.db";
+    //mai usato
     private static final String DATABASE_USER="provatea_gm";
+
+    //dati utenti iscritti
     private static final String COLUMN_USERNAME="username";
     private static final String TABLE_CAMERIERE="Cameriere";
     private static final String COlUMN_NOME="nome";
     private static final String COlUMN_COGNOME="cognome";
     private static final String COlUMN_NUM_TELEFONO="num_telefono";
+
+    //creazione del cameriere con i dati inseriti
     private  String CREATE_CAMERIERE_TABLE="CREATE TABLE if not exists  "+TABLE_CAMERIERE+"("+
             COLUMN_USERNAME+" varchar(100) not null primary key, "+COlUMN_NOME+" varchar(50) not null, "+
             COlUMN_COGNOME+" varchar(50) not null, "+COlUMN_NUM_TELEFONO+" varchar(10) not null)";
 
+    //lista ingredienti
     private String CREATE_TABLE_INGREDIENTE="CREATE TABLE if not exists ingrediente(" +
             "  nome varchar(50) not null primary key);" +
             ")";
 
+    //inserimento tavoli
     private String CREATE_TABLE_TAVOLO="CREATE TABLE if not exists tavolo(" +
             "  numero int not null primary key" +
             ")";
 
+    //ordine completo
     private String CREATE_TABLE_ORDINE="CREATE TABLE if not exists ordine(\n" +
             "  codice int auto_increment not null primary key,\n" +
             "  tavolo int references tavolo(numero)\n" +
@@ -51,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete no action\n" +
             ")";
 
+    //inserimrnto della pietanza per ogni ordine
     private String CREATE_TABLE_COMPOSTO="create table if not exists composto(\n" +
             "  pietanza_ordinata int  references pietanza_ordinata(codice)\n" +
             "  on delete no action\n" +
@@ -60,6 +69,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete no action,\n" +
             "  primary key(pietanza_ordinata,ordine)\n" +
             ")";
+
+    //ingredienti da cui è formata la pietanza
     private String CREATE_TABLE_CREA="create table if not exists crea(\n" +
             "  pietanza varchar(50)  references pietanza(nome)\n" +
             "  on delete no action\n" +
@@ -72,6 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
             ")";
 
+    //nome della pietanza del menù con costo e descrizione
     private String CREATE_TABLE_PIETANZA="create table if not exists pietanza(\n" +
             "  nome varchar(50) not null primary key,\n" +
             "  categoria varchar(50) not null,\n" +
@@ -79,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  descrizione varchar(200) not null\n" +
             ")";
 
+    //asscocia la pietanza scelta al codice dell'ordine
     private String CREATE_TABLE_PIETANZA_ORDINATA="create table if not exists pietanza_ordinata(\n" +
             "  codice int not null primary key,\n" +
             "  pietanza varchar(50) references pietanza(nome)\n" +
@@ -86,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete cascade\n" +
             ")";
 
+    //dati dell'aggiunta di un ingrediente per la pietanza ordinata
     private String CREATE_TABLE_AGGIUNTO="create table if not exists aggiunto( \n" +
             "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
             "  on update cascade\n" +
@@ -99,9 +113,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             ")";
 
 
-
-
-    private String DROP_TABLE="";
 
     @Override
     public void onCreate(SQLiteDatabase db){
@@ -119,18 +130,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     }
 
+    private String DROP_TABLE="";
     @Override
     public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
         db.execSQL(DROP_TABLE);
         onCreate(db);
     }
 
+    //gestisce il database
     public DatabaseHelper (Context context){
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
 
     }
 
-    //aggiungo cameriere alla tabella
+    //aggiungo cameriere con i suoi dati alla tabella
     public void addCameriere(Cameriere cameriere){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -144,7 +157,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     //ricerco un cameriere
     public boolean checkCameriere(String username){
-        //costruzione query di ricerca per username
+        //query di ricerca per username
         String[] columns={
                 COLUMN_USERNAME
         };
@@ -164,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
 
-    //inserisco una pietanza
+    //inserisco una pietanza campo per campo
     public void addPietanza(Pietanza pietanza){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -176,6 +189,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String[] selectionArgs={ pietanza.getNome() };
         Cursor cursor=db.query("pietanza",columns,selection,selectionArgs,null,null,null);
         int pietanza_inserita=cursor.getCount();
+
         //se non ho nessuna pietanza con tale nome, la inserisco
         if(pietanza_inserita==0){
             values.put("nome",pietanza.getNome());
@@ -183,12 +197,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             values.put("costo",pietanza.getPrezzo());
             values.put("categoria",pietanza.getCategoria());
             db.insert("pietanza",null,values);
-        }else{
-            //altrimenti nulla
         }
 
     }
 
+    //inserisco pietanza tramite una stringa SQL
     public void inserisciPietanze(String pietanze){
         SQLiteDatabase db=this.getWritableDatabase();
         db.execSQL(pietanze);
@@ -227,6 +240,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         String numero=""+tavolo.getNumero();
         String[] selectionArgs={numero};
         Cursor cursor=db.query("tavolo",columns,selection,selectionArgs,null,null,null);
+
+        //se non è inserito il numero del tavolo lo aggiungo
         if(cursor.getCount()==0){
             int pietanza_inserita=cursor.getCount();
             values.put("numero",tavolo.getNumero());
@@ -253,7 +268,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.insert("pietanza_ordinata",null,values);
     }
 
-    //aggiungo record a tabella crea( ingredienti usati per una pietanza)
+    //aggiungo record a tabella crea (ingredienti usati per una pietanza)
     public void addCrea(Pietanza pietanza,Ingrediente ingrediente,int quantita){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -263,7 +278,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.insert("crea",null,values);
     }
 
-    //aggiungo la possibile aggiunta che una persona ha fatto nella sua pietanza ordinata
+    //inserisco la possibile aggiunta che una persona ha fatto nella sua pietanza ordinata
     public void addAggiunto(Pietanza_Ordinata pietanza_ordinata,Ingrediente ingrediente,int costo){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
@@ -274,14 +289,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
 
-    //ricerco se un ordine esiste
+    //controllo se un certo ordine esiste
     public boolean checkOrdine(int codice){
         String[] columns={
                 "codice"
         };
         SQLiteDatabase db=this.getWritableDatabase();
         String selection="codice"+" = ?";
-        //
         String[] selectionArgs={ ""+codice };
         Cursor cursor=db.query("ordine",columns,selection,selectionArgs,null,null,null);
         //conto i camerieri trovati
@@ -309,7 +323,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             return max_codice;
         }
         cursor.close();
-        //in caso  non esista nessun ordine inserito, inserisco al primo ordine il valore del codice ad 1
+        //in caso  non esista nessun ordine inserito, il codice del primo è 1
         return 1;
 
     }
@@ -338,7 +352,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         }*/
 
 
-    //metodo per visualizzare pietanze in base alla tipologia
+    //visualizza le pietanze in base alla tipologia
     public Cursor vedi_pietanze(String categoria){
         String[] columns={
                 "nome",
