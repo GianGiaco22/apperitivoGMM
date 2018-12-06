@@ -1,5 +1,6 @@
 package com.example.gian2.apperitivogmm.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -84,19 +85,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private void postDataToSQLite(){
         if(!inputValidation.isInputEditTextFilled(username)){
-            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per l'username !",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per l'username!",Toast.LENGTH_LONG).show();
             return;
         }
         if(!inputValidation.isInputEditTextFilled(nome)){
-            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il nome !",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il nome!",Toast.LENGTH_LONG).show();
             return;
         }
         if(!inputValidation.isInputEditTextFilled(cognome)){
-            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il cognome !",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il cognome!",Toast.LENGTH_LONG).show();
             return;
         }
         if(!inputValidation.isInputTextNumTelFilled(numtel)){
-            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il numero di telefono !",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il numero di telefono!",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -109,6 +110,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             databaseHelper.addCameriere(cameriere);
             Toast.makeText(register,"Sei stato registrato con successo",Toast.LENGTH_LONG).show();
             emptyInputEditText();
+
+            Intent intent=new Intent(getApplicationContext(), OrdinaActivity.class);
+            startActivity(intent);
 
         }else{
             Toast.makeText(register,"Errore nella registrazione",Toast.LENGTH_LONG).show();
