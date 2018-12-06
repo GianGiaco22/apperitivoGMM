@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il cognome!",Toast.LENGTH_LONG).show();
             return;
         }
-        if(!inputValidation.isInputTextNumTelFilled(numtel)){
+        if(!inputValidation.isInputTextNumTelFilled(numtel) || numtel.length()!= 10){
             Toast.makeText(getApplicationContext(),"Inserisci un valore valido per il numero di telefono!",Toast.LENGTH_LONG).show();
             return;
         }
@@ -101,11 +101,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             cameriere.setCognome(cognome.getText().toString().trim());
             cameriere.setNum_telefono(numtel.getText().toString().trim());
 
-//conta_pietanze[i].setInputType(InputType.TYPE_CLASS_NUMBER)
-
             databaseHelper.addCameriere(cameriere);
             Toast.makeText(register,"Sei stato registrato con successo",Toast.LENGTH_LONG).show();
             emptyInputEditText();
+
+            /* Bundle bundle = new Bundle();
+            bundle.putString("name", edit_name.getText().toString());
+            bundle.putString("lastname", edit_lastname.getText().toString());
+            Intent form_intent = new Intent(getApplicationContext(), Form.class);
+            form_intent.putExtras(bundle);
+            startActivity(form_intent);*/
 
             Intent intent=new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
