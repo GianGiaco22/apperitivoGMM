@@ -26,7 +26,10 @@ import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
 public class OrdinaActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final AppCompatActivity ordinaActivity= OrdinaActivity.this;
+    private final AppCompatActivity ordinaActivity;
+    {
+        ordinaActivity = OrdinaActivity.this;
+    }
     private TextView titolo;
     private DatabaseHelper databaseHelper;
     private InputValidation inputValidation;
@@ -34,14 +37,21 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     private Ordine ordine;
     private int tavolo;
     private String utente;
+    //creo oggetto bottone per ordinare
+    private Button conferma;
 
 
     protected void onCreate(Bundle savedInstanceState ){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordina);
-        initListeners();
-        initObjects();
+        //inizializzo views
         initViews();
+        //inizializzo listeners
+        initListeners();
+        //inizializzo oggetti
+        initObjects();
+
         for (int i=1;i<=12;i++){
             Tavolo t=new Tavolo();
             t.setNumero(i);
@@ -132,17 +142,21 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view){
+        //in base al bottone che clicco...
         switch(view.getId()){
-
-
+            //nel caso in cui clicco il bottone con id ordina
+            case R.id.ordina:
+                //eseguo...
+            Toast.makeText(getApplicationContext(), "Cliccato sul bottone", Toast.LENGTH_SHORT).show();
+            break;
         }
-    }
 
+    }
+    //inizializzo viste
     private void initViews(){
 
        titolo=(TextView) findViewById(R.id.titolo);
-
-
+       conferma=(Button) findViewById(R.id.ordina);
        tavolo=getIntent().getIntExtra("Tavolo",0);
        utente=getIntent().getStringExtra("Cameriere_usrnm").toString().trim();
        ordine=new Ordine();
@@ -150,11 +164,11 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
        ordine.setTavolo(tavolo);
 
     }
-
+    //inizializo listeners
     private void initListeners(){
-
+        conferma.setOnClickListener(this);
     }
-
+    //inizializzo oggetti
     private void initObjects(){
         databaseHelper=new DatabaseHelper(ordinaActivity);
         inputValidation=new InputValidation(ordinaActivity);
@@ -202,6 +216,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         }else{
             Toast.makeText(ordinaActivity, "nulla", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 
