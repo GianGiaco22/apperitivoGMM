@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         nome=(EditText) findViewById(R.id.nome);
         cognome=(EditText) findViewById(R.id.cognome);
         numtel=(EditText) findViewById(R.id.numtel);
+        numtel.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
     }
