@@ -23,11 +23,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private final AppCompatActivity register= RegisterActivity.this;
 
     private Button registrati_button;
-    private  EditText username;
-    private  EditText nome;
-    private  EditText cognome;
-    private  EditText numtel;
-    private Button login_link_button;
+    private EditText username;
+    private EditText nome;
+    private EditText cognome;
+    private EditText numtel;
     private DatabaseHelper databaseHelper;
     private InputValidation inputValidation;
     private Cameriere cameriere=new Cameriere();
@@ -49,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String String_cognome=preferences.getString("cognome",null);
         String String_nome=preferences.getString("nome",null);
         String String_numtel=preferences.getString("numtel",null);
-        login_link_button=(Button) findViewById(R.id.login_link);
         registrati_button=(Button) findViewById(R.id.registrati);
         username=(EditText) findViewById(R.id.usrnm);
         nome=(EditText) findViewById(R.id.nome);
@@ -60,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initListeners(){
-       login_link_button.setOnClickListener(this);
        registrati_button.setOnClickListener(this);
     }
 
@@ -69,19 +66,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         inputValidation=new InputValidation(register);
     }
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.registrati:
+    public void onClick(View v) {
+        if(v == registrati_button)
                 //visualizzo se registrazione è andata a buon fine
                 postDataToSQLite();
-                break;
-            case R.id.login_link:
-                //distruggo la activity
-                finish();
-                break;
+
         }
 
-    }
+
 
     private void postDataToSQLite(){
         if(!inputValidation.isInputEditTextFilled(username)){
@@ -106,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             cameriere.setNome(nome.getText().toString().trim());
             cameriere.setCognome(cognome.getText().toString().trim());
             cameriere.setNum_telefono(numtel.getText().toString().trim());
+
+//conta_pietanze[i].setInputType(InputType.TYPE_CLASS_NUMBER)
 
             databaseHelper.addCameriere(cameriere);
             Toast.makeText(register,"Sei stato registrato con successo",Toast.LENGTH_LONG).show();
