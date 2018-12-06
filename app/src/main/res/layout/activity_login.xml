@@ -48,11 +48,11 @@
         <Button
             android:textColor="#fff"
             android:background="@drawable/buttonstyleselector"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_gravity="left"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:text="@string/bottone_creazione"
             android:id="@+id/crea"
             />
