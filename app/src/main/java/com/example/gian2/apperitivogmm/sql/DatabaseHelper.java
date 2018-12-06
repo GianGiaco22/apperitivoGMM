@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     //ordine completo
     private String CREATE_TABLE_ORDINE="CREATE TABLE if not exists ordine(\n" +
-            "  codice int auto_increment not null primary key,\n" +
+            "  codice int auto_increment  primary key,\n" +
             "  tavolo int references tavolo(numero)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
@@ -209,15 +209,14 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //inserisco un ordine
-    public void addOrdine(Ordine ordine){
+    public long addOrdine(Ordine ordine){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
-        values.put("codice",ordine.getCodice());
         values.put("tavolo",ordine.getTavolo());
         values.put("cameriere",ordine.getCameriere());
 
 
-        db.insertOrThrow("ordine",null,values);
+       return  db.insert("ordine",null,values);
 
 
     }

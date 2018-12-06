@@ -146,8 +146,13 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         switch(view.getId()){
             //nel caso in cui clicco il bottone con id ordina
             case R.id.ordina:
-                //eseguo...
-            Toast.makeText(getApplicationContext(), "Cliccato sul bottone", Toast.LENGTH_SHORT).show();
+                long inserito=databaseHelper.addOrdine(ordine);
+                if (inserito != (-1)) {
+                    Toast.makeText(ordinaActivity,"Ordine inserito",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(ordinaActivity,"Ordine non inserito",Toast.LENGTH_SHORT).show();
+                }
+
             break;
         }
 
@@ -197,6 +202,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
             for(int i=0; i<cursor.getCount();i++){
                 pietanze[i]=new TextView(this);
                 conta_pietanze[i]=new EditText(this);
+
                 pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
                 conta_pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
                 //vedo in ordine : Titolo, prezzo, descrizione
@@ -218,6 +224,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+
 
 
 
