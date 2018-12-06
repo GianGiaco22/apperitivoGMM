@@ -74,18 +74,6 @@
             android:text="@string/bottone_registrati"
             android:id="@+id/registrati"/>
 
-        <Button
-
-            android:textColor="#fff"
-            android:background="@drawable/buttonstyleselector"
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="@string/login_link"
-            android:id="@+id/login_link" />
-
 
     </LinearLayout>
 
