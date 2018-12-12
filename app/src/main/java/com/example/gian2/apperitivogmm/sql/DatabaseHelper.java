@@ -71,27 +71,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  primary key(pietanza_ordinata,ordine)\n" +
             ")";
 
-    //ingredienti da cui è formata la pietanza
-    private String CREATE_TABLE_CREA="create table if not exists crea(\n" +
-            "  pietanza varchar(50)  references pietanza(nome)\n" +
-            "  on delete no action\n" +
-            "  on update cascade,\n" +
-            "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
-            "  on update cascade\n" +
-            "  on delete no action,\n" +
-            "  quantita integer not null,\n" +
-            "  primary key(pietanza,ingrediente)\n" +
-
-            ")";
-
-    //nome della pietanza del menù con costo e descrizione
-    private String CREATE_TABLE_PIETANZA="create table if not exists pietanza(\n" +
-            "  nome varchar(50) not null primary key,\n" +
-            "  categoria varchar(50) not null,\n" +
-            "  costo float not null,\n" +
-            "  descrizione varchar(200) not null\n" +
-            ")";
-
     //asscocia la pietanza scelta al codice dell'ordine
     private String CREATE_TABLE_PIETANZA_ORDINATA="create table if not exists pietanza_ordinata(\n" +
             "  codice int not null primary key,\n" +
@@ -115,6 +94,34 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
 
+
+    //ingredienti da cui è formata la pietanza
+    private String CREATE_TABLE_CREA="create table if not exists crea(\n" +
+            "  pietanza varchar(50)  references pietanza(nome)\n" +
+            "  on delete no action\n" +
+            "  on update cascade,\n" +
+            "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
+            "  on update cascade\n" +
+            "  on delete no action,\n" +
+            "  quantita integer not null,\n" +
+            "  primary key(pietanza,ingrediente)\n" +
+
+            ")";
+
+    //nome della pietanza del menù con costo e descrizione
+    private String CREATE_TABLE_PIETANZA="create table if not exists pietanza(\n" +
+            "  nome varchar(50) not null primary key,\n" +
+            "  categoria varchar(50) not null,\n" +
+            "  costo float not null,\n" +
+            "  descrizione varchar(200) not null\n" +
+            ")";
+
+
+
+
+
+
+
     @Override
     public void onCreate(SQLiteDatabase db){
     //creo tutte le tabelle del database
@@ -123,10 +130,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_TAVOLO);
         db.execSQL(CREATE_TABLE_ORDINE);
         db.execSQL(CREATE_TABLE_INGREDIENTE);
-        db.execSQL(CREATE_TABLE_COMPOSTO);
         db.execSQL(CREATE_TABLE_CREA);
-        db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
+        db.execSQL(CREATE_TABLE_AGGIUNTO);
+        db.execSQL(CREATE_TABLE_COMPOSTO);
 
 
     }
@@ -353,7 +360,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
     //visualizza le pietanze in base alla tipologia
-    public Cursor vedi_pietanze(String categoria){
+    public Cursor vedi_pietanze(){
         String[] columns={
                 "nome",
                 "costo",
@@ -362,8 +369,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         };
         SQLiteDatabase db=this.getReadableDatabase();
         String selection="categoria= ?";
-        String selectionArgs[]={categoria};
-        Cursor cursor=db.query("pietanza",columns,selection,selectionArgs,null,null,null);
+
+        Cursor cursor=db.query("pietanza",columns,null,null,
+                null,null,"categoria,nome,costo");
         return cursor;
     }
 

@@ -8,4 +8,5 @@
     <string name="cognome">Cognome...</string>
     <string name="numtel">Numero di telefono...</string>
     <string name="conferma_ordine">Conferma</string>
+    <string name="title_activity_conferma_ordine">ConfermaOrdineActivity</string>
 </resources>
