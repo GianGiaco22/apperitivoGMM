@@ -9,4 +9,5 @@
     <string name="numtel">Numero di telefono...</string>
     <string name="conferma_ordine">Conferma</string>
     <string name="title_activity_conferma_ordine">ConfermaOrdineActivity</string>
+    <string name="conferma">Modifica e Invia ordine</string>
 </resources>

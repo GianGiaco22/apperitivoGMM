@@ -21,6 +21,8 @@ public class ConfermaOrdineActivity extends AppCompatActivity {
     TextView[] textViewPietanze;
     //edittext per vedere la quantità di ogni pietanza ordinata
     EditText[] editTextQuantitaPietanza;
+    //edittext per aggiunta ingredienti
+    EditText[] editTextAggiuntaIngredienti;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,9 @@ public class ConfermaOrdineActivity extends AppCompatActivity {
         //prendo i diversi valori passati tramite intent
         Intent ordina_activity=getIntent();
         ArrayList<Pietanza> pietanze_ordinate= ordina_activity.getParcelableArrayListExtra("Pietanze_ordinate");
+        ArrayList<Integer> quantita_pietanze_ordinate=ordina_activity.getIntegerArrayListExtra("Conta_pietanze");
         textViewPietanze=new TextView[pietanze_ordinate.size()];
+        editTextAggiuntaIngredienti=new EditText[pietanze_ordinate.size()];
         editTextQuantitaPietanza=new EditText[pietanze_ordinate.size()];
         for(int i=0; i<pietanze_ordinate.size();i++){
             textViewPietanze[i]=new TextView(this);
@@ -36,7 +40,11 @@ public class ConfermaOrdineActivity extends AppCompatActivity {
             textViewPietanze[i].setText(pietanze_ordinate.get(i).getNome());
             textViewPietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
             editTextQuantitaPietanza[i].setTextColor(getResources().getColor(R.color.colorAccent));
+            editTextQuantitaPietanza[i].setText(quantita_pietanze_ordinate.get(i).toString());
+            ((LinearLayout) this.findViewById(R.id.pietanze)).addView(editTextQuantitaPietanza[i]);
             ((LinearLayout) this.findViewById(R.id.pietanze)).addView(textViewPietanze[i]);
+
+
         }
     }
 

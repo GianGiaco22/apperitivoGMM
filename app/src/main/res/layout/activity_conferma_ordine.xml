@@ -16,6 +16,13 @@
         android:paddingTop="10px"
         android:id="@+id/pietanze"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/conferma"
+            android:textSize="18dp"/>
 
 
 

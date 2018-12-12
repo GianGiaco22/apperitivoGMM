@@ -335,28 +335,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     }
 
-    //ottengo i piatti di una determinata categoria
-    /*public Pietanza[] ottieniPiattiTipologia(String[] categoria) {
-        Pietanza[] piatti = new Pietanza[10];
-        String[] columns = {
-                "nome",
-                "costo",
-                "descrizione",
-                "categoria"
-
-
-        };
-        String selection = "categoria" + " = ?";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("pietanza", columns, selection, categoria, null, null, "nome");
-        if (cursor.moveToFirst()) {
-            int i = 0;
-            while (!cursor.isAfterLast()) {
-                piatti[i] = new Pietanza();
-
-            }
-        }
-        }*/
 
 
     //visualizza le pietanze in base alla tipologia

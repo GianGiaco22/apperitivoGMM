@@ -187,7 +187,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 //invio il numero del tavolo
                 conferma_ordine.putExtra("Tavolo",tavolo);
                 //invio l'array contenente tutte le diverse quantità delle pietanze ordinate
-                conferma_ordine.putExtra("Conta_pietanze",quantita_pietanze);
+                conferma_ordine.putIntegerArrayListExtra("Conta_pietanze",quantita_pietanze);
                 startActivity(conferma_ordine);
             break;
         }
