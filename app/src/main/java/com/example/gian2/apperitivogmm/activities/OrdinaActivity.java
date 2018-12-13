@@ -39,8 +39,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     private TextView titolo;
     private DatabaseHelper databaseHelper;
     private InputValidation inputValidation;
-    //cameriere che segue l 'ordine
-    private Cameriere cameriere=new Cameriere();
     //tavolo scelto su cui fare l'ordine
     private int tavolo;
     //cameriere che accede alla creazione dell'ordine
@@ -148,7 +146,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 "('Acqua gassata','bevanda','bottiglia da 0.75',2.50),\n" +
                 "('Caffe','bevanda','caffe classico',1.50),\n" +
                 "('Grappa della casa','bevanda','grappa fatta in casa',3);\n");
-        String[] categorie={"antipasto","primo","secondo","bevanda","dolce"};
         //inizializzo tutte le diverse variabili e visualizzo tutto il menu
         show_all_dishes();
 
@@ -163,10 +160,9 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         switch(view.getId()){
             //nel caso in cui clicco il bottone con id ordina
             case R.id.ordina:
-                //contatore per vedere quante pietanze diverse sono state ordinate
-                int count_pietanze_ordinate=0;
+
                 //controllo le pietanze ordinate guardando che la quantità sia !=0
-                for (int i=0; i<pietanze.length; i++) {
+                for (int i=0; i<lista_pietanze.length; i++) {
                     //controllo che la quantità sia diversa da 0
                     if(Integer.parseInt(conta_pietanze[i].getText().toString())>0){
                         //inserisco nell array delle pietanze ordinate una pietanza ordinata
@@ -174,10 +170,10 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                         pietanze_ordinate.add(lista_pietanze[i]);
                         //inserisco nell'array delle quantità delle pietanze ordinate la quantità della pietanza ordinata
                         quantita_pietanze.add((Integer)Integer.parseInt(conta_pietanze[i].getText().toString()));
-                        count_pietanze_ordinate++;
+
                     }
                 }
-                Toast.makeText(getApplicationContext()," "+count_pietanze_ordinate,Toast.LENGTH_LONG).show();
+
                 //accedo alla pagina di conferma dell'ordine
                 Intent conferma_ordine=new Intent(getApplicationContext(),ConfermaOrdineActivity.class);
                 //passo le pietanze ordinate tramite implementazione nella classe Pietanza di Parcelable
@@ -219,6 +215,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private void show_all_dishes( ){
+        //oggetto per vedere tutte le pietanze dal database
         Cursor cursor=databaseHelper.vedi_pietanze();
         if(cursor.getCount()>0){
             pietanze=new TextView[cursor.getCount()];
@@ -238,9 +235,13 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                     ((LinearLayout) this.findViewById(R.id.pietanze)).addView(categoria_vedi[j]);
                     j++;
                 }
+                //setto prima TextView
                 pietanze[i]=new TextView(this);
+                //setto contatore Editext
                 conta_pietanze[i]=new EditText(this);
+
                 pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
+
                 conta_pietanze[i].setText("0");
                 conta_pietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
                 //vedo in ordine : Titolo, prezzo, descrizione
