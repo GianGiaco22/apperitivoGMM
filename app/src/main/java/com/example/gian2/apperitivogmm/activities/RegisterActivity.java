@@ -105,12 +105,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Toast.makeText(register,"Sei stato registrato con successo",Toast.LENGTH_LONG).show();
             emptyInputEditText();
 
-            /* Bundle bundle = new Bundle();
-            bundle.putString("name", edit_name.getText().toString());
-            bundle.putString("lastname", edit_lastname.getText().toString());
-            Intent form_intent = new Intent(getApplicationContext(), Form.class);
-            form_intent.putExtras(bundle);
-            startActivity(form_intent);*/
 
             Intent intent=new Intent(getApplicationContext(), Login.class);
             startActivity(intent);

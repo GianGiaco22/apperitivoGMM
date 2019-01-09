@@ -41,7 +41,6 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
         vedi_username=(TextView) findViewById(R.id.vedi);
          usernameFromIntent=getIntent().getStringExtra("USERNAME");
         vedi_username.setText(" Benvenuto "+usernameFromIntent+", seleziona il tavolo :");
@@ -49,6 +48,11 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         initViews();
         initListeners();
         initObjects();
+        for (int i=1;i<=12;i++){
+            Tavolo t=new Tavolo();
+            t.setNumero(i);
+            databaseHelper.addTavolo(t);
+        }
 
 
     }

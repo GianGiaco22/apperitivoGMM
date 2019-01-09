@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="18px"
     android:paddingRight="18px"
-    android:background="#000000"
+    android:background="#3d5afe"
     tools:context="com.example.gian2.apperitivogmm.activities.Login">
 
     <LinearLayout

@@ -36,11 +36,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         initViews();
         initListeners();
         initObjects();
-
-
-
-
-
     }
 
     //inizializzo parti del form
@@ -122,45 +117,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
 }
-/*
-    public void login(){
-        //utilizzo libreria volley
-        //vado a richiedere utilizzo del file login.php , attraverso una richiesta HTTP
-        StringRequest request=new StringRequest(Request.Method.POST, "http://www.proveteamgl.it/apperitivo/GMM/login.php",new Response.Listener<String>(){
-            @Override
-            //in caso ottenga una risposta dal server
-            public void onResponse(String response){
-                Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
-                //se ottengo risposta contenente  "successo" --> login eseguito correttamente
-                if(response.contains("successo")){
-                    //apro activity di gestione degli ordini
-                    startActivity(new Intent(getApplicationContext(),GestioneOrdini.class));
-                }
-            }
-            //in caso di risposta errata
-        },new Response.ErrorListener(){
-            @Override
-            //output della risposta errata
-            public void onErrorResponse(VolleyError error){
-                Toast.makeText(getApplicationContext(),error.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        }
 
-
-
-        ){
-            @Override
-            //creo mappa con parametri passati dal file login.php col metodo POST
-            protected Map<String,String> getParams() throws AuthFailureError{
-                //creo oggetto tipo mappa
-                Map<String,String> params=new HashMap<>();
-                //inserisco chiave e valore nell'array di tipo Map
-                params.put("username",username.getText().toString());
-                return params;
-            }
-        };
-        //eseguo l'oggetto StringRequest request
-        Volley.newRequestQueue(this).add(request);
-    }
-*/
 

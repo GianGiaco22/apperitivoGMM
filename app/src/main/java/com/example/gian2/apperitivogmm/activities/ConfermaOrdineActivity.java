@@ -1,51 +1,116 @@
 package com.example.gian2.apperitivogmm.activities;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.example.gian2.apperitivogmm.R;
+import com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter;
+import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
+import com.example.gian2.apperitivogmm.model.EditPietanzaModel;
+import com.example.gian2.apperitivogmm.model.EditPietanzaOrdinataModel;
+import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.model.Pietanza;
-
+import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 import java.util.ArrayList;
 
-public class ConfermaOrdineActivity extends AppCompatActivity {
-    //textview per vedere ogni pietanza ordinata
-    TextView[] textViewPietanze;
-    //edittext per vedere la quantità di ogni pietanza ordinata
-    EditText[] editTextQuantitaPietanza;
-    //edittext per aggiunta ingredienti
-    EditText[] editTextAggiuntaIngredienti;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+import static com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter.pietanze;
+
+public class ConfermaOrdineActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private DatabaseHelper databaseHelper;
+    private int tavolo;
+    private String cameriere;
+    private Button invia_ordine;
+    private TextView info_ordine;
+
+    private CustomPietanzaOrdinataAdapter customPietanzaOrdinataAdapter;
+    private ListView listaPietanzaOrdinate ;
+    private ArrayList<EditPietanzaOrdinataModel> pietanzaView;
+
+
+    protected void onCreate(Bundle savedInstanceState ){
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferma_ordine);
-        //prendo i diversi valori passati tramite intent
-        Intent ordina_activity=getIntent();
-        ArrayList<Pietanza> pietanze_ordinate= ordina_activity.getParcelableArrayListExtra("Pietanze_ordinate");
-        ArrayList<Integer> quantita_pietanze_ordinate=ordina_activity.getIntegerArrayListExtra("Conta_pietanze");
-        textViewPietanze=new TextView[pietanze_ordinate.size()];
-        editTextAggiuntaIngredienti=new EditText[pietanze_ordinate.size()];
-        editTextQuantitaPietanza=new EditText[pietanze_ordinate.size()];
-        for(int i=0; i<pietanze_ordinate.size();i++){
-            textViewPietanze[i]=new TextView(this);
-            editTextQuantitaPietanza[i]=new EditText(this);
-            textViewPietanze[i].setText(pietanze_ordinate.get(i).getNome());
-            textViewPietanze[i].setTextColor(getResources().getColor(R.color.colorAccent));
-            editTextQuantitaPietanza[i].setTextColor(getResources().getColor(R.color.colorAccent));
-            editTextQuantitaPietanza[i].setText(quantita_pietanze_ordinate.get(i).toString());
-            ((LinearLayout) this.findViewById(R.id.pietanze)).addView(editTextQuantitaPietanza[i]);
-            ((LinearLayout) this.findViewById(R.id.pietanze)).addView(textViewPietanze[i]);
+
+        //inizializzo views
+        initViews();
+        //inizializzo listeners
+        initListeners();
+        //inizializzo oggetti
+        initObjects();
+
+        //creo il menu
+        databaseHelper.createMenu();
+        pietanzaView=getPietanzeOrdinate();
+        customPietanzaOrdinataAdapter=new CustomPietanzaOrdinataAdapter(this,pietanzaView);
+        listaPietanzaOrdinate.setAdapter(customPietanzaOrdinataAdapter);
 
 
-        }
     }
 
+
+    private void initViews(){
+        invia_ordine=(Button) findViewById(R.id.conferma);
+        listaPietanzaOrdinate=(ListView) findViewById(R.id.ordine_completo);
+        info_ordine=(TextView)findViewById(R.id.info_ordine);
+        cameriere=getIntent().getStringExtra("cameriere").toString().trim();
+        tavolo=getIntent().getIntExtra("tavolo",0);
+        info_ordine.setText("ordine di "+cameriere+" al tavolo "+tavolo);
+
+
+    }
+    private void initListeners(){
+        invia_ordine.setOnClickListener(this);
+    }
+
+
+    private void initObjects(){
+        databaseHelper=new DatabaseHelper(getApplicationContext());
+    }
+
+    @Override
+    public void onClick(View view){
+
+    }
+
+
+
+
+
+    private ArrayList<EditPietanzaOrdinataModel> getPietanzeOrdinate(){
+        ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList=new ArrayList<>();
+        for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
+            EditPietanzaOrdinataModel editPietanzaOrdinataModel =new EditPietanzaOrdinataModel();
+            editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
+            editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
+            editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
+            editPietanzaOrdinataModel.setModifica("");
+            editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
+        }
+
+        return editPietanzaOrdinataModelArrayList;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

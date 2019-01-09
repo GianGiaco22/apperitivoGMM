@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.gian2.apperitivogmm.model.Cameriere;
-import com.example.gian2.apperitivogmm.model.Ingrediente;
 import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.model.Pietanza;
-import com.example.gian2.apperitivogmm.model.Pietanza_Ordinata;
 import com.example.gian2.apperitivogmm.model.Tavolo;
 
 
@@ -37,10 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             COLUMN_USERNAME+" varchar(100) not null primary key, "+COlUMN_NOME+" varchar(50) not null, "+
             COlUMN_COGNOME+" varchar(50) not null, "+COlUMN_NUM_TELEFONO+" varchar(10) not null)";
 
-    //lista ingredienti
-    private String CREATE_TABLE_INGREDIENTE="CREATE TABLE if not exists ingrediente(" +
-            "  nome varchar(50) not null primary key);" +
-            ")";
+
 
     //inserimento tavoli
     private String CREATE_TABLE_TAVOLO="CREATE TABLE if not exists tavolo(" +
@@ -60,52 +55,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     //inserimrnto della pietanza per ogni ordine
     private String CREATE_TABLE_COMPOSTO="create table if not exists composto(\n" +
-            "  pietanza_ordinata int  references pietanza_ordinata(codice)\n" +
+            "  pietanza varchar(50) not null references pietanza(nome)\n" +
             "  on delete no action\n" +
             "  on update cascade,\n" +
             "  ordine int not null references ordine(codice)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
             "  quantita_pietanza int not null,\n " +
-            "  primary key(pietanza_ordinata,ordine)\n" +
-            ")";
-
-    //asscocia la pietanza scelta al codice dell'ordine
-    private String CREATE_TABLE_PIETANZA_ORDINATA="create table if not exists pietanza_ordinata(\n" +
-            "  codice int not null primary key,\n" +
-            "  pietanza varchar(50) references pietanza(nome)\n" +
-            "  on update cascade\n" +
-            "  on delete cascade\n" +
-            ")";
-
-    //dati dell'aggiunta di un ingrediente per la pietanza ordinata
-    private String CREATE_TABLE_AGGIUNTO="create table if not exists aggiunto( \n" +
-            "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
-            "  on update cascade\n" +
-            "  on delete no action,\n" +
-            "  pietanza_ordinata int not null references pietanza_ordinata(codice)\n" +
-            "  on update cascade\n" +
-            "  on delete no action,\n" +
-            "  costo float not null,\n" +
-            "  primary key(ingrediente,pietanza_ordinata)\n" +
-
+            "  modifica varchar(100),\n"+
+            "  primary key(pietanza,ordine)\n" +
             ")";
 
 
 
 
-    //ingredienti da cui è formata la pietanza
-    private String CREATE_TABLE_CREA="create table if not exists crea(\n" +
-            "  pietanza varchar(50)  references pietanza(nome)\n" +
-            "  on delete no action\n" +
-            "  on update cascade,\n" +
-            "  ingrediente varchar(50) not null references ingrediente(nome)\n" +
-            "  on update cascade\n" +
-            "  on delete no action,\n" +
-            "  quantita integer not null,\n" +
-            "  primary key(pietanza,ingrediente)\n" +
-
-            ")";
 
     //nome della pietanza del menù con costo e descrizione
     private String CREATE_TABLE_PIETANZA="create table if not exists pietanza(\n" +
@@ -128,10 +91,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(CREATE_TABLE_PIETANZA);
         db.execSQL(CREATE_TABLE_TAVOLO);
         db.execSQL(CREATE_TABLE_ORDINE);
-        db.execSQL(CREATE_TABLE_INGREDIENTE);
-        db.execSQL(CREATE_TABLE_CREA);
-        db.execSQL(CREATE_TABLE_PIETANZA_ORDINATA);
-        db.execSQL(CREATE_TABLE_AGGIUNTO);
         db.execSQL(CREATE_TABLE_COMPOSTO);
 
 
@@ -215,25 +174,19 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //inserisco un ordine
-    public long addOrdine(Ordine ordine){
+    public int addOrdine(Ordine ordine){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put("tavolo",ordine.getTavolo());
         values.put("cameriere",ordine.getCameriere());
 
 
-       return  db.insert("ordine",null,values);
+       return  (int)db.insert("ordine",null,values);
 
 
     }
 
-    //inserisco nuovo ingrediente
-    public void addIngrediente(Ingrediente ingrediente){
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put("nome",ingrediente.getNome());
-        db.insert("ingrediente",null,values);
-    }
+
 
     //aggiungo un tavolo
     public void addTavolo(Tavolo tavolo){
@@ -257,99 +210,143 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     //aggiungo pietanza ad un ordine
-    public void addComposto(Ordine ordine,Pietanza_Ordinata pietanza_ordinata){
+    public int addComposto(Ordine ordine,String pietanza,int quantita,String modifica){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put("ordine",ordine.getCodice());
-        values.put("pietanza_ordinata",pietanza_ordinata.getCodice());
-        db.insert("composto",null,values);
-    }
-
-    //aggiungo pietanza_ordinata (che può avere ingredienti aggiuntivi)
-    public void addPietanzaOrdinata(Pietanza pietanza,int codice){
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put("codice",codice);
-        values.put("pietanza",pietanza.getNome());
-        db.insert("pietanza_ordinata",null,values);
-    }
-
-    //aggiungo record a tabella crea (ingredienti usati per una pietanza)
-    public void addCrea(Pietanza pietanza,Ingrediente ingrediente,int quantita){
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put("pietanza",pietanza.getNome());
-        values.put("ingrediente",ingrediente.getNome());
-        values.put("quantita",ingrediente.getNome());
-        db.insert("crea",null,values);
-    }
-
-    //inserisco la possibile aggiunta che una persona ha fatto nella sua pietanza ordinata
-    public void addAggiunto(Pietanza_Ordinata pietanza_ordinata,Ingrediente ingrediente,int costo){
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues values=new ContentValues();
-        values.put("pietanza_ordinata",pietanza_ordinata.getCodice());
-        values.put("ingrediente",ingrediente.getNome());
-        values.put("costo",costo);
-        db.insert("aggiunto",null,values);
-    }
-
-
-    //controllo se un certo ordine esiste
-    public boolean checkOrdine(int codice){
-        String[] columns={
-                "codice"
-        };
-        SQLiteDatabase db=this.getWritableDatabase();
-        String selection="codice"+" = ?";
-        String[] selectionArgs={ ""+codice };
-        Cursor cursor=db.query("ordine",columns,selection,selectionArgs,null,null,null);
-        //conto i camerieri trovati
-        int ordini_trovati=cursor.getCount();
-        cursor.close();
-        //se ho trovato il cameriere cercato
-        if(ordini_trovati>0){
-            return true;
-        }
-        return false;
-
-    }
-
-    //ricerco ultimo codice dell'ordine inserito
-    public int cercaUltimoCodiceOrdine(){
-        String[] columns={
-                "MAX(codice) AS max_codice"
-        };
-        SQLiteDatabase db=this.getWritableDatabase();
-        Cursor cursor=db.query("ordine",columns,null,null,null,null,null);
-
-        if(cursor.moveToFirst()){
-            int max_codice=cursor.getInt((int)cursor.getColumnIndex("max_codice"));
-            cursor.close();
-            return max_codice;
-        }
-        cursor.close();
-        //in caso  non esista nessun ordine inserito, il codice del primo è 1
-        return 1;
-
+        values.put("pietanza",pietanza);
+        values.put("quantita_pietanza",quantita);
+        values.put("modifica",modifica);
+       return (int) db.insert("composto",null,values);
     }
 
 
 
     //visualizza le pietanze in base alla tipologia
-    public Cursor vedi_pietanze(){
+    public Cursor vedi_pietanze(String categoria){
         String[] columns={
                 "nome",
                 "costo",
                 "descrizione",
                 "categoria"
         };
+
         SQLiteDatabase db=this.getReadableDatabase();
         String selection="categoria= ?";
+        String[] selectionArgs={
+                categoria
+        };
 
-        Cursor cursor=db.query("pietanza",columns,null,null,
-                null,null,"categoria,nome,costo");
+        Cursor cursor=db.query("pietanza",columns,selection,selectionArgs,
+                null,null,"nome,costo");
         return cursor;
+    }
+
+
+
+
+    public float conto_ordine(Ordine ordine){
+        float conto_totale=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="SELECT SUM(quantita_pietanza*costo) as conto from pietanza inner join composto on nome=pietanza " +
+                " where ordine="+ordine.getCodice();
+        Cursor conto_parziale=db.rawQuery(query,null);
+        conto_parziale.moveToFirst();
+        //conto_totale+=Float.parseFloat(conto_parziale.getString(0));
+        return conto_parziale.getFloat(0);
+
+    }
+
+    //calcolo del costo di una pietanza
+    public float costo_pietanza(String pietanza, int quantita_pietanza,String modifica){
+        float costo=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        String query="SELECT costo from pietanza where nome="+pietanza;
+        Cursor costo_senza_aggiunte=db.rawQuery(query,null);
+        costo_senza_aggiunte.moveToFirst();
+        costo=costo_senza_aggiunte.getFloat(0)*quantita_pietanza;
+        if(!modifica.equals("")){
+            costo+=1;
+        }
+        return costo;
+    }
+
+
+    public void createMenu(){
+        Pietanza[] menu=new Pietanza[28];
+        for(int i=0;i<28;i++){
+            menu[i]=new Pietanza();
+        }
+        menu[0].setCategoria("primo");
+        menu[0].setDescrizione("spaghetti con vongole veraci e prezzemolo");
+        menu[0].setNome("Spaghetti con le vongole");
+        menu[0].setPrezzo(9.5f);
+        menu[1].setCategoria("primo");
+        menu[1].setDescrizione("bigoli al ragù d anatra con formaggio grana");
+        menu[1].setNome("Bigoli al ragù d'anatra");
+        menu[1].setPrezzo(9.5f);
+        menu[2].setCategoria("primo");
+        menu[2].setDescrizione("gnocchi fatti in casa con ragù di manzo");
+        menu[2].setNome("Gnocchi al ragù");
+        menu[2].setPrezzo(9f);
+        menu[3].setCategoria("primo");
+        menu[3].setDescrizione("riso con vongole, gamberetti e pescato del giorno");
+        menu[3].setNome("Riso con pesce");
+        menu[3].setPrezzo(13f);
+        menu[4].setCategoria("primo");
+        menu[4].setDescrizione("bigoli con ragù di manzo");
+        menu[4].setNome("Bigoli al ragù");
+        menu[4].setPrezzo(9f);
+        menu[5].setCategoria("primo");
+        menu[5].setDescrizione("gnocchi con salsa di pomodoro");
+        menu[5].setNome("Gnocchi al pomodoro");
+        menu[5].setPrezzo(8f);
+        for(int i=0;i<6;i++){
+            addPietanza(menu[i]);
+        }
+        menu[1].setCategoria("secondo");
+        menu[1].setDescrizione("tartare con verdure di stagione");
+        menu[1].setNome("Tartare di verdure");
+        menu[1].setPrezzo(10f);
+        menu[2].setCategoria("secondo");
+        menu[2].setDescrizione("pescata del giorno con contorno di patate lesse");
+        menu[2].setNome("Grigliata mista di pesce");
+        menu[2].setPrezzo(18f);
+        menu[3].setCategoria("secondo");
+        menu[3].setDescrizione("osetti,salsiccia,pancetta e polenta di contorno");
+        menu[3].setNome("Grigliata mista di carne");
+        menu[3].setPrezzo(16f);
+        menu[4].setCategoria("secondo");
+        menu[4].setDescrizione("tagliata di tonno con verdure di contorno di stagione");
+        menu[4].setNome("Tagliata di tonno");
+        menu[4].setPrezzo(12f);
+        menu[5].setCategoria("secondo");
+        menu[5].setDescrizione("tagliata di manzo con verdure di contorno di stagione");
+        menu[5].setNome("Tagliata di manzo");
+        menu[5].setPrezzo(10f);
+        for(int i=1;i<6;i++){
+            addPietanza(menu[i]);
+        }
+
+        inserisciPietanze("INSERT OR IGNORE INTO pietanza (nome,categoria,descrizione,costo)\n" +
+                "VALUES "+
+                "" +
+                "('Tris di formaggi e affettati','antipasto','formaggi e affettati di stagione',9),\n" +
+                "('Vongole saltate con crostino','antipasto','vongole pescated oggi',6),\n" +
+                "('Antipasto vegetariano','antipasto','verdure di stagione',6),\n" +
+                "('Burrata con salmone affumicato e rucola','antipasto','il top della casa',10),\n" +
+                "('Crostata nostrana','dolce','crostata con marmellata fatta dalla casa',5),\n" +
+                "('Coppa gelato','dolce','gelato alla panna e alla fragola',4),\n" +
+                "('Profiteroll bianco','dolce','',4),\n" +
+                "('Profitterol nero','dolce','',4),\n" +
+                "('Birra bionda','bevanda','birra moretti',5),\n" +
+                "('Birra Rossa','bevanda','birra moretti rossa',5),\n" +
+                "('Vino rosso','bevanda','vino rosso della casa',4),\n" +
+                "('Vino bianco','bevanda','vino rosso della casa',4),\n" +
+                "('Acqua naturale','bevanda','bottiglia da 0.75',2.50),\n" +
+                "('Acqua gassata','bevanda','bottiglia da 0.75',2.50),\n" +
+                "('Caffe','bevanda','caffe classico',1.50),\n" +
+                "('Grappa della casa','bevanda','grappa fatta in casa',3);\n");
     }
 
     }
