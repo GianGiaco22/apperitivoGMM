@@ -202,7 +202,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         //se non è inserito il numero del tavolo lo aggiungo
         if(cursor.getCount()==0){
-            int pietanza_inserita=cursor.getCount();
             values.put("numero",tavolo.getNumero());
             db.insert("tavolo",null,values);
         }
