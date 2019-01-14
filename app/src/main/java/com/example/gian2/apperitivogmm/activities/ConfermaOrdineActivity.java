@@ -34,6 +34,8 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     private CustomPietanzaOrdinataAdapter customPietanzaOrdinataAdapter;
     private ListView listaPietanzaOrdinate ;
     private ArrayList<EditPietanzaOrdinataModel> pietanzaView;
+    //ordine da creare
+    private Ordine ordine;
 
 
     protected void onCreate(Bundle savedInstanceState ){
@@ -61,10 +63,10 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     private void initViews(){
         invia_ordine=(Button) findViewById(R.id.conferma);
         listaPietanzaOrdinate=(ListView) findViewById(R.id.ordine_completo);
-        info_ordine=(TextView)findViewById(R.id.info_ordine);
+
         cameriere=getIntent().getStringExtra("cameriere").toString().trim();
         tavolo=getIntent().getIntExtra("tavolo",0);
-        info_ordine.setText("ordine di "+cameriere+" al tavolo "+tavolo);
+
 
 
     }
@@ -79,7 +81,25 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view){
-
+        float conto_totale=0;
+        ordine=new Ordine();
+        ordine.setTavolo(tavolo);
+        ordine.setCameriere(cameriere);
+        ordine.setCodice(databaseHelper.addOrdine(ordine));
+        for(int i=0; i<pietanzaView.size();i++){
+             conto_totale+=pietanzaView.get(i).getCosto()*pietanzaView.get(i).getQuantita();
+             if(!pietanzaView.get(i).getModifica().equals("")){
+                 conto_totale++;
+             }
+        }
+        Intent intent=new Intent(ConfermaOrdineActivity.this,ContoActivity.class);
+        //passo conto finale all'ordine finale
+        intent.putExtra("conto",conto_totale);
+        //passo codice  ordine alla prossima activity
+        intent.putExtra("ordine",ordine.getCodice());
+        intent.putExtra("Cameriere_usrnm",cameriere);
+        startActivity(intent);
+        Toast.makeText(this, ""+conto_totale, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -89,12 +109,14 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     private ArrayList<EditPietanzaOrdinataModel> getPietanzeOrdinate(){
         ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList=new ArrayList<>();
         for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
-            EditPietanzaOrdinataModel editPietanzaOrdinataModel =new EditPietanzaOrdinataModel();
-            editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
-            editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
-            editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
-            editPietanzaOrdinataModel.setModifica("");
-            editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
+            if(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita())!=0) {
+                EditPietanzaOrdinataModel editPietanzaOrdinataModel = new EditPietanzaOrdinataModel();
+                editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
+                editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
+                editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
+                editPietanzaOrdinataModel.setModifica("");
+                editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
+            }
         }
 
         return editPietanzaOrdinataModelArrayList;

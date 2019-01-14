@@ -50,6 +50,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         initObjects();
         for (int i=1;i<=12;i++){
             Tavolo t=new Tavolo();
+
             t.setNumero(i);
             databaseHelper.addTavolo(t);
         }

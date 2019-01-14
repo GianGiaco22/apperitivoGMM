@@ -50,7 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  on delete no action,\n" +
             "  cameriere not null references cameriere(username)\n" +
             "  on update cascade\n" +
-            "  on delete no action\n" +
+            "  on delete no action,\n" +
+            "   conto float\n "+
             ")";
 
     //inserimrnto della pietanza per ogni ordine

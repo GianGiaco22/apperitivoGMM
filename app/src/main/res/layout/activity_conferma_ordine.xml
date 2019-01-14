@@ -2,17 +2,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/info_ordine"
-        android:layout_alignTop="@+id/ordine_completo"
-        android:width="30dp"
-        android:textColor="#ffffff"
-        android:background="#082139"
-        />
     <ListView
-        android:layout_marginTop="30dp"
         android:id="@+id/ordine_completo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

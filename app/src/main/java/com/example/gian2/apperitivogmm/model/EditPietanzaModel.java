@@ -10,6 +10,7 @@ public class EditPietanzaModel {
     private float prezzo;
     private String descrizione;
 
+
     public String getQuantita() {
         return quantita;
     }
@@ -41,4 +42,9 @@ public class EditPietanzaModel {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
+
+
+
+
 }

@@ -103,6 +103,7 @@ public class CustomPietanzaAdapter extends BaseAdapter {
             }
         });
 
+
         return convertView;
     }
 
