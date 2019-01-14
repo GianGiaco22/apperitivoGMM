@@ -77,11 +77,10 @@ public class CustomPietanzaOrdinataAdapter extends BaseAdapter {
             holder = (CustomPietanzaOrdinataAdapter.ViewHolder)convertView.getTag();
         }
 
-        holder.editTextModifica.setText(""+pietanzeOrdinate.get(position).getQuantita());
+        holder.editTextModifica.setText(""+pietanzeOrdinate.get(position).getModifica());
         holder.textViewPrezzo.setText(""+pietanzeOrdinate.get(position).getCosto());
         holder.textViewNome.setText(pietanzeOrdinate.get(position).getNomePietanza());
         holder.textViewQuantita.setText(""+pietanzeOrdinate.get(position).getQuantita());
-
         holder.editTextModifica.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -90,7 +89,7 @@ public class CustomPietanzaOrdinataAdapter extends BaseAdapter {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                pietanzeOrdinate.get(position).setQuantita(Integer.parseInt(holder.editTextModifica.getText().toString()));
+                pietanzeOrdinate.get(position).setModifica(holder.editTextModifica.getText().toString());
 
             }
 
