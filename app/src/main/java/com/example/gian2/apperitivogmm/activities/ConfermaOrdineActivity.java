@@ -98,6 +98,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         //passo codice  ordine alla prossima activity
         intent.putExtra("ordine",ordine.getCodice());
         intent.putExtra("Cameriere_usrnm",cameriere);
+        intent.putExtra("tavolo",tavolo);
         startActivity(intent);
         Toast.makeText(this, ""+conto_totale, Toast.LENGTH_SHORT).show();
     }
