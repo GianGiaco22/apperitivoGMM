@@ -81,26 +81,24 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view){
-        float conto_totale=0;
-        ordine=new Ordine();
-        ordine.setTavolo(tavolo);
-        ordine.setCameriere(cameriere);
-        ordine.setCodice(databaseHelper.addOrdine(ordine));
+        float conto_senza_modifiche=0;
+        float conto_modifiche=0;
         for(int i=0; i<pietanzaView.size();i++){
-             conto_totale+=pietanzaView.get(i).getCosto()*pietanzaView.get(i).getQuantita();
+             conto_senza_modifiche+=pietanzaView.get(i).getCosto()*pietanzaView.get(i).getQuantita();
              if(!pietanzaView.get(i).getModifica().equals("")){
-                 conto_totale++;
+                 conto_modifiche++;
              }
         }
+       //creo intent per passare a ContoActivity
         Intent intent=new Intent(ConfermaOrdineActivity.this,ContoActivity.class);
-        //passo conto finale all'ordine finale
-        intent.putExtra("conto",conto_totale);
+        //passo i due conti alla prossima Activity
+        intent.putExtra("conto_modifiche",conto_modifiche);
+        intent.putExtra("conto_senza_modifiche",conto_senza_modifiche);
         //passo codice  ordine alla prossima activity
         intent.putExtra("ordine",ordine.getCodice());
         intent.putExtra("Cameriere_usrnm",cameriere);
         intent.putExtra("tavolo",tavolo);
         startActivity(intent);
-        Toast.makeText(this, ""+conto_totale, Toast.LENGTH_SHORT).show();
     }
 
 

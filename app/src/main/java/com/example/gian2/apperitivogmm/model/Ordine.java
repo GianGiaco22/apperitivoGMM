@@ -7,12 +7,11 @@ import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
  */
 
 public class Ordine {
-    //tale numero mi permette di creare un attributo tale che si auto incrementi ad ogni creazione di un Ordine
-    // Così facendo, inserirò ordini aventi tutti codici diversi
 
     private  int codice;
     private int tavolo;
     private String cameriere;
+    private float conto;
 
     public Ordine() {
 
@@ -42,5 +41,13 @@ public class Ordine {
 
     public void setCameriere(String cameriere) {
         this.cameriere = cameriere;
+    }
+
+    public void setConto(float conto){
+        this.conto=conto;
+    }
+
+    public float getConto(){
+        return conto;
     }
 }

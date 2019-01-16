@@ -155,6 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         ContentValues values=new ContentValues();
         values.put("tavolo",ordine.getTavolo());
         values.put("cameriere",ordine.getCameriere());
+        values.put("conto",ordine.getConto());
 
 
        return  (int)db.insert("ordine",null,values);
