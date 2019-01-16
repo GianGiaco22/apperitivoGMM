@@ -15,21 +15,35 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            />
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:textSize="15dp"
+            android:layout_height="70dp"
+            android:textSize="23dp"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:layout_gravity="center"
             android:id="@+id/info"/>
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:id="@+id/conto_senza_modifiche"
+            />
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:layout_gravity="center"
+            android:id="@+id/conto_modifiche"
+            />
          <TextView
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:id="@+id/conto"
-            android:textSize="30dp"
+            android:id="@+id/conto_totale"
+            android:textSize="20dp"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:layout_gravity="center"/>

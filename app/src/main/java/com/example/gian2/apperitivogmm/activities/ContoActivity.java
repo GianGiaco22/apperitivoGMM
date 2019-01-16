@@ -29,8 +29,12 @@ import java.util.ArrayList;
 public class ContoActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DatabaseHelper databaseHelper;
-    //textView per vedere il conto
-    private TextView contoTextView;
+    //textView per vedere il conto senza modifiche
+    private TextView conto_senza_modificheTextView;
+    //textView per vedere il conto totale
+    private TextView conto_totaleTextView;
+    //textView per vedere il conto delle modifiche
+    private TextView conto_modificheTextView;
     //conto totale
     private TextView info_ordine;
     //conto senza modifiche
@@ -67,6 +71,10 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
         initObjects();
         //inserisco stringa per info dell'ordine
         info_ordine.setText("Ordine  dal cameriere "+cameriere+" al tavolo "+tavolo);
+        conto_modificheTextView.setText("Conto delle modifiche : "+conto_modifiche);
+        conto_senza_modificheTextView.setText("Conto pietanze senza modifiche : "+conto_senza_modifiche);
+        conto_totaleTextView.setText("Conto totale : "+conto_totale);
+
 
 
 
@@ -77,9 +85,11 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
 
     private void initViews(){
         //inizializzo tutti i componenti del Layout
-    contoTextView=(TextView) findViewById(R.id.conto);
-    info_ordine=(TextView) findViewById(R.id.info);
-    torna_tavolo=(Button) findViewById(R.id.torna);
+         conto_totaleTextView=(TextView) findViewById(R.id.conto_totale);
+         conto_senza_modificheTextView=(TextView) findViewById(R.id.conto_senza_modifiche);
+         conto_modificheTextView=(TextView) findViewById(R.id.conto_modifiche);
+         info_ordine=(TextView) findViewById(R.id.info);
+         torna_tavolo=(Button) findViewById(R.id.torna);
     }
     private void initListeners(){
         //assoccio listener al Button
