@@ -26,23 +26,26 @@ import static com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter.pietan
 public class ConfermaOrdineActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseHelper databaseHelper;
+    //tavolo possibile ordine
     private int tavolo;
+    //cameriere possibile ordine
     private String cameriere;
+    //button per inviare ordine all'activity ContoOrdine
     private Button invia_ordine;
-    private TextView info_ordine;
-
+    //gestore per visualizzare pietanze ordinate
     private CustomPietanzaOrdinataAdapter customPietanzaOrdinataAdapter;
+    //componente grafico che contiente la lista delle pietanze ordinate
     private ListView listaPietanzaOrdinate ;
+    //array di componenti grafici relativi alle pietanze ordinate modificabili
     private ArrayList<EditPietanzaOrdinataModel> pietanzaView;
-    //ordine da creare
-    private Ordine ordine;
 
 
     protected void onCreate(Bundle savedInstanceState ){
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferma_ordine);
-
+        cameriere=getIntent().getStringExtra("cameriere").toString().trim();
+        tavolo=getIntent().getIntExtra("tavolo",0);
         //inizializzo views
         initViews();
         //inizializzo listeners
@@ -50,10 +53,11 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         //inizializzo oggetti
         initObjects();
 
-        //creo il menu
-        databaseHelper.createMenu();
+        //ottengo lista componenti grafici relativi a pietanze ordinate
         pietanzaView=getPietanzeOrdinate();
+        //inizializzo Adapter per inserire tutte le diverse pietanze ordinate nella ListView
         customPietanzaOrdinataAdapter=new CustomPietanzaOrdinataAdapter(this,pietanzaView);
+        //inserisco la lista di pietanze
         listaPietanzaOrdinate.setAdapter(customPietanzaOrdinataAdapter);
 
 
@@ -63,12 +67,6 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     private void initViews(){
         invia_ordine=(Button) findViewById(R.id.conferma);
         listaPietanzaOrdinate=(ListView) findViewById(R.id.ordine_completo);
-
-        cameriere=getIntent().getStringExtra("cameriere").toString().trim();
-        tavolo=getIntent().getIntExtra("tavolo",0);
-
-
-
     }
     private void initListeners(){
         invia_ordine.setOnClickListener(this);
@@ -81,11 +79,16 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View view){
+        //creo conti senza modifiche e delle modifiche
+        //per ogni modifica, aggiungo 1 euro al conto
         float conto_senza_modifiche=0;
         float conto_modifiche=0;
         for(int i=0; i<pietanzaView.size();i++){
+            //sommo i diversi conti parziali dati dal costo unitario della pietanza per la quantità della stessa ordinata
              conto_senza_modifiche+=pietanzaView.get(i).getCosto()*pietanzaView.get(i).getQuantita();
+             //se EditText modifica non è vuota
              if(!pietanzaView.get(i).getModifica().equals("")){
+                 //allora ho fatto una modifica e quindi il costo solo delle modifiche viene aumentato di 1 euro
                  conto_modifiche++;
              }
         }
@@ -95,7 +98,6 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         intent.putExtra("conto_modifiche",conto_modifiche);
         intent.putExtra("conto_senza_modifiche",conto_senza_modifiche);
         //passo codice  ordine alla prossima activity
-        intent.putExtra("ordine",ordine.getCodice());
         intent.putExtra("Cameriere_usrnm",cameriere);
         intent.putExtra("tavolo",tavolo);
         startActivity(intent);
@@ -104,20 +106,24 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
 
 
 
-
+    //metodo per ottenere tutte le pietanze ordinate con la quantità relativa
     private ArrayList<EditPietanzaOrdinataModel> getPietanzeOrdinate(){
+        //array che passerò con con tutte le pietanze aventi quantità diversa da 0
         ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList=new ArrayList<>();
         for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
-            if(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita())!=0) {
+            //se la quantità della pietanza della lista del menu è maggiore di 0
+            if(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita())>0) {
+                //creo oggetto per creare una pietanza ordinata a cui posso aggiungere modifiche
                 EditPietanzaOrdinataModel editPietanzaOrdinataModel = new EditPietanzaOrdinataModel();
                 editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
                 editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
                 editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
                 editPietanzaOrdinataModel.setModifica("");
+                //aggiungo tale oggetto all'array di oggetti da passare
                 editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
             }
         }
-
+    //ritorno la lista di oggetti modificabili legati alle pietanze ordinate modificabili
         return editPietanzaOrdinataModelArrayList;
     }
 }
