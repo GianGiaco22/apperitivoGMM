@@ -11,4 +11,5 @@
     <string name="title_activity_conferma_ordine">ConfermaOrdineActivity</string>
     <string name="conferma">Modifica e Invia ordine</string>
     <string name="invia_ordine">Invia ordine</string>
+    <string name="title_activity_vedi_ordini">VediOrdiniActivity</string>
 </resources>

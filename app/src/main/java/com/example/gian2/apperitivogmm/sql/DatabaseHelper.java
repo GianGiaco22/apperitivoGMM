@@ -5,10 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.model.Ordine;
-import com.example.gian2.apperitivogmm.model.Pietanza;
 import com.example.gian2.apperitivogmm.model.Tavolo;
 
 
@@ -220,31 +218,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
 
-
-    public float conto_ordine(Ordine ordine){
-        float conto_totale=0;
+    //metodo per vedere tutte le pietanze relative ad un ordine
+    public Cursor vedi_pietanze_ordine(int codiceOrdine){
+        String[] columns={
+                "pietanza",
+                "quantita",
+                "modifica"
+        };
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="SELECT SUM(quantita_pietanza*costo) as conto from pietanza inner join composto on nome=pietanza " +
-                " where ordine="+ordine.getCodice();
-        Cursor conto_parziale=db.rawQuery(query,null);
-        conto_parziale.moveToFirst();
-        //conto_totale+=Float.parseFloat(conto_parziale.getString(0));
-        return conto_parziale.getFloat(0);
-
-    }
-
-    //calcolo del costo di una pietanza
-    public float costo_pietanza(String pietanza, int quantita_pietanza,String modifica){
-        float costo=0;
-        SQLiteDatabase db=this.getReadableDatabase();
-        String query="SELECT costo from pietanza where nome="+pietanza;
-        Cursor costo_senza_aggiunte=db.rawQuery(query,null);
-        costo_senza_aggiunte.moveToFirst();
-        costo=costo_senza_aggiunte.getFloat(0)*quantita_pietanza;
-        if(!modifica.equals("")){
-            costo+=1;
-        }
-        return costo;
+        String selection="ordine= ?";
+        String[] selectionArgs={
+                codiceOrdine+""
+        };
+        Cursor cursor=db.query("composto",columns,selection,selectionArgs,null,null,null);
+        return cursor;
     }
 
 

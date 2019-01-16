@@ -7,7 +7,7 @@
     android:paddingLeft="18px"
     android:paddingRight="18px"
     android:background="#3d5afe"
-    tools:context="com.example.gian2.apperitivogmm.activities.Login">
+    tools:context="com.example.gian2.apperitivogmm.activities.ContoActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

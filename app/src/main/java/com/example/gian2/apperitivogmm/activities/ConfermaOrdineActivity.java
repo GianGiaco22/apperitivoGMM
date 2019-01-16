@@ -6,22 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
-import com.example.gian2.apperitivogmm.model.EditPietanzaModel;
 import com.example.gian2.apperitivogmm.model.EditPietanzaOrdinataModel;
-import com.example.gian2.apperitivogmm.model.Ordine;
-import com.example.gian2.apperitivogmm.model.Pietanza;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 import java.util.ArrayList;
-
-import static com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter.pietanze;
 
 public class ConfermaOrdineActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -109,7 +101,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     //metodo per ottenere tutte le pietanze ordinate con la quantità relativa
     private ArrayList<EditPietanzaOrdinataModel> getPietanzeOrdinate(){
         //array che passerò con con tutte le pietanze aventi quantità diversa da 0
-        ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList=new ArrayList<>();
+        ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList =new ArrayList<>();
         for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
             //se la quantità della pietanza della lista del menu è maggiore di 0
             if(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita())>0) {

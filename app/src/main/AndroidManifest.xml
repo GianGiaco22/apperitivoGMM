@@ -31,10 +31,14 @@
         <activity
             android:name=".activities.ConfermaOrdineActivity"
             android:label="@string/title_activity_conferma_ordine"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ContoActivity"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.VediOrdiniActivity"
+            android:label="@string/title_activity_vedi_ordini"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,26 +1,16 @@
 package com.example.gian2.apperitivogmm.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
-import com.example.gian2.apperitivogmm.model.EditPietanzaOrdinataModel;
 import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 /**
  * Created by gian2 on 14/01/2019.
