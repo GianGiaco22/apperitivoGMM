@@ -180,6 +180,7 @@
             android:textSize="10dp"
             android:background="@drawable/buttonstyleselector"
             android:textColor="#ffffff"
+            android:id="@+id/vedi_ordini"
             android:layout_gravity="center"
             android:text="Ordini completati"/>
 

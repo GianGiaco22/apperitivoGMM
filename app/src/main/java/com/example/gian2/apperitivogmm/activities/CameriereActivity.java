@@ -34,6 +34,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
     private Button tavolo10;
     private Button tavolo11;
     private Button tavolo12;
+    private Button vedi_ordini;
     private DatabaseHelper databaseHelper;
     private String usernameFromIntent;
 
@@ -72,6 +73,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         tavolo10=(Button) findViewById(R.id.tavolo10);
         tavolo11=(Button) findViewById(R.id.tavolo11);
         tavolo12=(Button) findViewById(R.id.tavolo12);
+        vedi_ordini=(Button) findViewById(R.id.vedi_ordini);
     }
 
     private void initListeners(){
@@ -87,6 +89,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         tavolo10.setOnClickListener(this);
         tavolo11.setOnClickListener(this);
         tavolo12.setOnClickListener(this);
+        vedi_ordini.setOnClickListener(this);
     }
 
     private void initObjects(){
@@ -160,6 +163,13 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
+            case R.id.vedi_ordini:
+                //intent per aprire Activity che visualizza ordini di un cameriere
+                Intent intent=new Intent(getApplicationContext(),VediOrdiniActivity.class);
+                //invio informazioni del cameriere
+                intent.putExtra("cameriere",usernameFromIntent);
+                startActivity(intent);
+
         }
     }
 

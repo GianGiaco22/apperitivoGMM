@@ -44,11 +44,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void initViews(){
-        SharedPreferences preferences=getPreferences(MODE_PRIVATE);
-        String String_username=preferences.getString("username",null);
-        String String_cognome=preferences.getString("cognome",null);
-        String String_nome=preferences.getString("nome",null);
-        String String_numtel=preferences.getString("numtel",null);
         registrati_button=(Button) findViewById(R.id.registrati);
         username=(EditText) findViewById(R.id.usrnm);
         nome=(EditText) findViewById(R.id.nome);

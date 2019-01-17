@@ -102,14 +102,8 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
             Cursor cursor=databaseHelper.vedi_pietanze(categoria[j]);
             if(cursor.getCount()>0){
                 cursor.moveToFirst();
-
-                String categoria_attuale="";
-                TextView[] categoria_vedi=new TextView[6];
                 //grafica scritte
                 for(int i=0; i<cursor.getCount(); i++){
-                    if(!cursor.getString(3).equals(categoria_attuale)){
-
-                    }
                     EditPietanzaModel editPietanzaModel =new EditPietanzaModel();
                     editPietanzaModel.setPrezzo(Float.parseFloat(cursor.getString(1)));
                     editPietanzaModel.setDescrizione(cursor.getString(2));
@@ -120,6 +114,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                     cursor.moveToNext();
                 }
             }
+            cursor.close();
         }
         return lvmenu;
     }

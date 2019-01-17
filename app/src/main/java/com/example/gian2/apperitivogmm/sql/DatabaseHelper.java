@@ -18,8 +18,6 @@ import com.example.gian2.apperitivogmm.model.Tavolo;
 public class DatabaseHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION=1 ;
     private static final String DATABASE_NAME="appgmm.db";
-    //mai usato
-    private static final String DATABASE_USER="provatea_gm";
 
     //dati utenti iscritti
     private static final String COLUMN_USERNAME="username";
@@ -42,12 +40,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     //ordine completo
     private String CREATE_TABLE_ORDINE="CREATE TABLE if not exists ordine(\n" +
-            "  codice int auto_increment  primary key,\n" +
+            "  codice INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "  tavolo int references tavolo(numero)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
             "  cameriere not null references cameriere(username)\n" +
-            "  on update cascade\n" +
             "  on delete no action,\n" +
             "   conto float\n "+
             ")";
@@ -222,17 +219,34 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public Cursor vedi_pietanze_ordine(int codiceOrdine){
         String[] columns={
                 "pietanza",
-                "quantita",
+                "quantita_pietanza",
                 "modifica"
         };
         SQLiteDatabase db=this.getReadableDatabase();
-        String selection="ordine= ?";
+        String selection="ordine=?";
         String[] selectionArgs={
-                codiceOrdine+""
+                ""+codiceOrdine
         };
         Cursor cursor=db.query("composto",columns,selection,selectionArgs,null,null,null);
         return cursor;
     }
+
+    //ricerco tutti gli ordini di un cameriere
+    public Cursor ordini_cameriere(Cameriere cameriere){
+        String[] columns={
+                "codice",
+                "conto"
+        };
+        SQLiteDatabase db=this.getReadableDatabase();
+        String selection="cameriere=?";
+        String[] selectionArgs= {
+                cameriere.getUsername()
+        };
+        Cursor cursor=db.query("ordine",columns,selection,selectionArgs,null,null,null);
+        return cursor;
+    }
+
+
 
 
     public void createMenu(){
