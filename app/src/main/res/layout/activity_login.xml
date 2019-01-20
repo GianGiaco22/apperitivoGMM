@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="18px"
     android:paddingRight="18px"
-    android:background="#3d5afe"
     tools:context="com.example.gian2.apperitivogmm.activities.Login">
 
     <LinearLayout
@@ -15,43 +14,26 @@
         android:paddingTop="100px"
         android:orientation="vertical">
         <TextView
-            android:gravity="center"
-            android:layout_width="300dp"
-            android:layout_height="70dp"
-            android:layout_gravity="center"
+            style="@style/TextViewStyle"
+
             android:text="@string/titolo_login"
-            android:textSize="25dp"
-            android:textColor="#f2edc4"/>
+            />
         <EditText
-            android:gravity="center"
-            android:textColor="#faf7f7"
-            android:textColorHint="#fff"
-            android:background="@drawable/edittextstyle"
+
             android:layout_marginTop="60dp"
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
+            style="@style/EditTextStyle"
             android:hint="Inserisci username..."
             android:id="@+id/username"
             android:layout_marginBottom="30dp"/>
         <Button
 
-            android:textColor="#fff"
-            android:background="@drawable/buttonstyleselector"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
+           style="@style/ButtonStyle"
             android:textSize="20dp"
             android:text="@string/bottone_accesso"
             android:id="@+id/accedi"/>
 
         <Button
-            android:textColor="#fff"
-            android:background="@drawable/buttonstyleselector"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="left"
+            style="@style/ButtonStyle"
             android:textSize="17dp"
             android:text="@string/bottone_creazione"
             android:id="@+id/crea"

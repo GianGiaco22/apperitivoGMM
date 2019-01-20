@@ -29,7 +29,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private DatabaseHelper databaseHelper;
-    private InputValidation inputValidation;
     //tavolo scelto su cui fare l'ordine
     private int tavolo;
     //cameriere che accede alla creazione dell'ordine
@@ -91,7 +90,6 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         tavolo=getIntent().getIntExtra("Tavolo",0);
         utente=getIntent().getStringExtra("Cameriere_usrnm").toString().trim();
         databaseHelper=new DatabaseHelper(ordinaActivity);
-        inputValidation=new InputValidation(ordinaActivity);
     }
 
     private ArrayList<EditPietanzaModel> get_all_dishes( ){
@@ -114,7 +112,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                     editPietanzaModel.setPrezzo(Float.parseFloat(cursor.getString(1)));
                     editPietanzaModel.setDescrizione(cursor.getString(2));
                     editPietanzaModel.setNomePietanza(cursor.getString(0));
-                    editPietanzaModel.setQuantita("0");
+                    editPietanzaModel.setQuantita("");
                     lvmenu.add(editPietanzaModel);
                     //creo tale Edittext come solo edit text numerica
                     cursor.moveToNext();

@@ -104,7 +104,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList =new ArrayList<>();
         for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
             //se la quantità della pietanza della lista del menu è maggiore di 0
-            if(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita())>0) {
+            if(!CustomPietanzaAdapter.pietanze.get(i).getQuantita().equals("")) {
                 //creo oggetto per creare una pietanza ordinata a cui posso aggiungere modifiche
                 EditPietanzaOrdinataModel editPietanzaOrdinataModel = new EditPietanzaOrdinataModel();
                 editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());

@@ -4,186 +4,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="18px"
-    android:paddingRight="18px"
-    android:background="#000000"
     tools:context="com.example.gian2.apperitivogmm.activities.CameriereActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:textColor="#FFF"
-                android:id="@+id/vedi"
-                android:textSize="20dp"
-                android:layout_gravity="center"
-                />
-
-
+        <TextView
+            android:id="@+id/vedi"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:textColor="#FFF"
+            android:textSize="15dp" />
 
 
         <Button
             android:id="@+id/tavolo1"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="1"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo4"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="4"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
+
         <Button
             android:id="@+id/tavolo7"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="7"
             android:textColor="#FFFFFF"
-            android:textSize="40dp" />
+            android:textSize="55dp" />
+
         <Button
             android:id="@+id/tavolo10"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="10"
             android:textColor="#FFFFFF"
-            android:textSize="40dp" />
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="-390dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="113dp"
+            android:layout_marginTop="-415dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="2"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="50dp" />
 
         <Button
             android:id="@+id/tavolo5"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="113dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="5"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo8"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="113dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="8"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="50dp" />
+
         <Button
             android:id="@+id/tavolo11"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="135dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="115dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="11"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="255dp"
-            android:layout_marginTop="-380dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="-410dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="3"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo6"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="255dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="6"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="50dp" />
 
         <Button
             android:id="@+id/tavolo9"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="255dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="9"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
             android:id="@+id/tavolo12"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginLeft="255dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_marginLeft="225dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_circle"
             android:gravity="center"
             android:text="12"
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="55dp" />
 
         <Button
-            android:layout_marginTop="20dp"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:textSize="10dp"
-            android:background="@drawable/buttonstyleselector"
-            android:textColor="#ffffff"
             android:id="@+id/vedi_ordini"
-            android:layout_gravity="center"
-            android:text="Ordini completati"/>
-
+            style="@style/ButtonStyle"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/buttonstyleselector"
+            android:text="Ordini completati"
+             />
 
 
     </LinearLayout>

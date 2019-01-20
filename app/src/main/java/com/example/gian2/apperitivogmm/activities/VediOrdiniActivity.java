@@ -84,7 +84,7 @@ public class VediOrdiniActivity extends AppCompatActivity implements View.OnClic
                 pietanzaordinataTextView.setGravity(Gravity.CENTER);
                 pietanzaordinataTextView.setTextSize(15);
                 pietanzaordinataTextView.setTextColor(Color.WHITE);
-                pietanzaordinataTextView.setPadding(0,5,0,5);
+                pietanzaordinataTextView.setPadding(0,0,0,5);
                 linearLayout.addView(pietanzaordinataTextView);
 
             }
