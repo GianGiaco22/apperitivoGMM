@@ -41,11 +41,11 @@
         />
     <EditText
         android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
+        android:textColorHint="#BDBDBD"
         android:background="#FFF"
         android:layout_marginTop="7dp"
         android:textSize="18dp"
-        android:hint="Quantita..."
+        android:hint="Inserisci quantita..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/descrizione"

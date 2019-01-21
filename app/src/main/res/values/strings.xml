@@ -12,4 +12,5 @@
     <string name="conferma">Modifica e Invia ordine</string>
     <string name="invia_ordine">Invia ordine</string>
     <string name="title_activity_vedi_ordini">VediOrdiniActivity</string>
+    <string name="torna_tavolo">Torna a tavoli</string>
 </resources>

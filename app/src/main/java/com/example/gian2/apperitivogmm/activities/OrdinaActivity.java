@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.gian2.apperitivogmm.R;
-import com.example.gian2.apperitivogmm.helper.InputValidation;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter;
 import com.example.gian2.apperitivogmm.model.EditPietanzaModel;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;

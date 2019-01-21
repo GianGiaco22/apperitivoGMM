@@ -19,8 +19,8 @@
         android:background="#FFF"/>
 
     <EditText
-        android:hint="Modifiche..."
-        android:textColorHint="@color/colorAccent"
+        android:hint="Inserisci modifiche..."
+        android:textColorHint="#BDBDBD"
         android:id="@+id/modifica"
         android:layout_width="300dp"
         android:layout_height="20dp"

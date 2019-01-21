@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
@@ -50,7 +49,10 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         //inizializzo Adapter per inserire tutte le diverse pietanze ordinate nella ListView
         customPietanzaOrdinataAdapter=new CustomPietanzaOrdinataAdapter(this,pietanzaView);
         //inserisco la lista di pietanze
-        listaPietanzaOrdinate.setAdapter(customPietanzaOrdinataAdapter);
+        if(pietanzaView.size()!=0){
+            listaPietanzaOrdinate.setAdapter(customPietanzaOrdinataAdapter);
+        }
+
 
 
     }
@@ -102,19 +104,22 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
     private ArrayList<EditPietanzaOrdinataModel> getPietanzeOrdinate(){
         //array che passerò con con tutte le pietanze aventi quantità diversa da 0
         ArrayList<EditPietanzaOrdinataModel> editPietanzaOrdinataModelArrayList =new ArrayList<>();
-        for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
-            //se la quantità della pietanza della lista del menu è maggiore di 0
-            if(!CustomPietanzaAdapter.pietanze.get(i).getQuantita().equals("")) {
-                //creo oggetto per creare una pietanza ordinata a cui posso aggiungere modifiche
-                EditPietanzaOrdinataModel editPietanzaOrdinataModel = new EditPietanzaOrdinataModel();
-                editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
-                editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
-                editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
-                editPietanzaOrdinataModel.setModifica("");
-                //aggiungo tale oggetto all'array di oggetti da passare
-                editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
+        if(CustomPietanzaAdapter.pietanze.size()!=0){
+            for(int i = 0; i< CustomPietanzaAdapter.pietanze.size(); i++){
+                //se la quantità della pietanza della lista del menu è maggiore di 0
+                if(!CustomPietanzaAdapter.pietanze.get(i).getQuantita().equals("")) {
+                    //creo oggetto per creare una pietanza ordinata a cui posso aggiungere modifiche
+                    EditPietanzaOrdinataModel editPietanzaOrdinataModel = new EditPietanzaOrdinataModel();
+                    editPietanzaOrdinataModel.setCosto(CustomPietanzaAdapter.pietanze.get(i).getPrezzo());
+                    editPietanzaOrdinataModel.setNomePietanza(CustomPietanzaAdapter.pietanze.get(i).getNomePietanza());
+                    editPietanzaOrdinataModel.setQuantita(Integer.parseInt(CustomPietanzaAdapter.pietanze.get(i).getQuantita()));
+                    editPietanzaOrdinataModel.setModifica("");
+                    //aggiungo tale oggetto all'array di oggetti da passare
+                    editPietanzaOrdinataModelArrayList.add(editPietanzaOrdinataModel);
+                }
             }
         }
+
     //ritorno la lista di oggetti modificabili legati alle pietanze ordinate modificabili
         return editPietanzaOrdinataModelArrayList;
     }

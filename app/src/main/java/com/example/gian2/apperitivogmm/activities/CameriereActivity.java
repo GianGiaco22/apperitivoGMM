@@ -9,11 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gian2.apperitivogmm.R;
-import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.model.Tavolo;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by gian2 on 31/07/2018.
@@ -104,63 +101,51 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()){
             case R.id.tavolo1:
                 tavolo.setNumero(1);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo2:
                 tavolo.setNumero(2);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo3:
                 tavolo.setNumero(3);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
 
                 ordina(tavolo);
                 break;
             case R.id.tavolo4:
                 tavolo.setNumero(4);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo5:
                 tavolo.setNumero(5);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo6:
                 tavolo.setNumero(6);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo7:
                 tavolo.setNumero(7);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo8:
                 tavolo.setNumero(8);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo9:
                 tavolo.setNumero(9);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo10:
                 tavolo.setNumero(10);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo11:
                 tavolo.setNumero(11);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.tavolo12:
                 tavolo.setNumero(12);
-                Toast.makeText(cameriere_attivita,"Tavolo "+tavolo.getNumero(),Toast.LENGTH_SHORT).show();
                 ordina(tavolo);
                 break;
             case R.id.vedi_ordini:
