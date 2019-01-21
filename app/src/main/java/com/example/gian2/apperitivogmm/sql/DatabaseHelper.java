@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     //ordine completo
     private String CREATE_TABLE_ORDINE="CREATE TABLE if not exists ordine(\n" +
             "  codice INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "  tavolo int references tavolo(numero)\n" +
+            "  tavolo int not null references tavolo(numero)\n" +
             "  on update cascade\n" +
             "  on delete no action,\n" +
             "  cameriere not null references cameriere(username)\n" +
