@@ -36,7 +36,7 @@
 
         <Button
             style="@style/ButtonStyle"
-            android:text="Torna a tavoli"
+            android:text="@string/torna_tavolo"
             android:id="@+id/torna"/>
 
 

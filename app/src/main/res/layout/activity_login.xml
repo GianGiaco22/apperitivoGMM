@@ -35,7 +35,7 @@
         <Button
             style="@style/ButtonStyle"
             android:textSize="17dp"
-            android:text="@string/bottone_creazione"
+            android:text="@string/nuovo_profilo"
             android:id="@+id/crea"
             />
 
