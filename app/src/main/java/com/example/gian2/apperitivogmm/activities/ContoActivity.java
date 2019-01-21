@@ -38,7 +38,7 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
     //cameriere responsabile
     private String cameriere;
     //buton per tornare alla scelta dei tavoli post completamento ordine
-    Button torna_tavolo;
+    private Button torna_tavolo;
 
 
 

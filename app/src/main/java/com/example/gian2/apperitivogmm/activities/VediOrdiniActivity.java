@@ -21,7 +21,7 @@ public class VediOrdiniActivity extends AppCompatActivity implements View.OnClic
     //cameriere di cui visualizzerò l'ordine
     private Cameriere cameriere;
     private Button vedi_ordini;
-    private   LinearLayout linearLayoutVediordini;
+    private LinearLayout linearLayoutVediordini;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

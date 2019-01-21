@@ -7,16 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaAdapter;
 import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
 import com.example.gian2.apperitivogmm.model.EditPietanzaOrdinataModel;
-import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 import java.util.ArrayList;
 
 public class ConfermaOrdineActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private DatabaseHelper databaseHelper;
     //tavolo possibile ordine
     private int tavolo;
     //cameriere possibile ordine
@@ -49,9 +49,15 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         //inizializzo Adapter per inserire tutte le diverse pietanze ordinate nella ListView
         customPietanzaOrdinataAdapter=new CustomPietanzaOrdinataAdapter(this,pietanzaView);
         //inserisco la lista di pietanze
-        if(pietanzaView.size()!=0){
+        try{
             listaPietanzaOrdinate.setAdapter(customPietanzaOrdinataAdapter);
         }
+        catch(Exception e){
+            Toast.makeText(getApplicationContext(),"Ordine vuoto!!",Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+
 
 
 
@@ -68,7 +74,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
 
 
     private void initObjects(){
-        databaseHelper=new DatabaseHelper(getApplicationContext());
+
     }
 
     @Override
