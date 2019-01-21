@@ -14,4 +14,5 @@
     <string name="title_activity_vedi_ordini">VediOrdiniActivity</string>
     <string name="torna_tavolo">Torna a tavoli</string>
     <string name="nuovo_profilo">Crea nuovo profilo</string>
+    <string name="ordini_completati">Ordini completati</string>
 </resources>

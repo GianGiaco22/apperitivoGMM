@@ -34,7 +34,7 @@
             />
         <Button
             style="@style/ButtonStyle"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="@string/bottone_registrati"
             android:id="@+id/registrati"/>
 

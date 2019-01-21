@@ -28,13 +28,13 @@
         <Button
 
            style="@style/ButtonStyle"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="@string/bottone_accesso"
             android:id="@+id/accedi"/>
 
         <Button
             style="@style/ButtonStyle"
-            android:textSize="17dp"
+            android:textSize="17sp"
             android:text="@string/nuovo_profilo"
             android:id="@+id/crea"
             />
