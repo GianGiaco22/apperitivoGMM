@@ -154,6 +154,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
                 //invio informazioni del cameriere
                 intent.putExtra("cameriere",usernameFromIntent);
                 startActivity(intent);
+                break;
 
         }
     }
