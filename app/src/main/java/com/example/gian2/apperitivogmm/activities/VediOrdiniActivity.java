@@ -32,7 +32,6 @@ public class VediOrdiniActivity extends AppCompatActivity implements View.OnClic
         InitObjects();
         cameriere.setUsername(getIntent().getStringExtra("cameriere"));
         visualizzaOrdini();
-        getSupportActionBar().hide();
 
     }
 
