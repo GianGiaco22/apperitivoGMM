@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.Cameriere;
@@ -39,7 +40,14 @@ public class VediOrdiniActivity extends AppCompatActivity implements View.OnClic
         InitListeners();
         InitObjects();
         cameriere.setUsername(getIntent().getStringExtra("cameriere"));
-        visualizzaOrdini();
+
+        try{
+            visualizzaOrdini();
+        }catch (Throwable e){
+            finish();
+            Toast.makeText(this, "Nessun ordine presente", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
