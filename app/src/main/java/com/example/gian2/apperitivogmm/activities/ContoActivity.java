@@ -13,7 +13,14 @@ import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
 /**
- * Created by gian2 on 14/01/2019.
+ * Scopi:
+ * > visualizzare il conto senza modifiche
+ * > visualizzare il conto delle sole modifiche
+ * > visualizzare il conto totale
+ * > confermare l'ordine per poi tornare alla selezione di un tavolo per un nuovo ordine
+ * *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
 
 public class ContoActivity extends AppCompatActivity implements View.OnClickListener{
@@ -66,14 +73,10 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
         conto_senza_modificheTextView.setText("Importo parziale: € "+conto_senza_modifiche);
         conto_totaleTextView.setText("Importo totale : € "+conto_totale);
 
-
-
-
-
-
     }
 
 
+    //inizializza parte grafica
     private void initViews(){
         //inizializzo tutti i componenti del Layout
          conto_totaleTextView=(TextView) findViewById(R.id.conto_totale);
@@ -82,13 +85,15 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
          info_ordine=(TextView) findViewById(R.id.info);
          torna_tavolo=(Button) findViewById(R.id.torna);
     }
+
+    //inizializza i listeners dei bottoni
     private void initListeners(){
         //assoccio listener al Button
     torna_tavolo.setOnClickListener(this);
 
     }
 
-
+    //inizializzo gli oggetti
     private void initObjects(){
         databaseHelper=new DatabaseHelper(getApplicationContext());
     }
@@ -118,10 +123,5 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
         intent.putExtra("USERNAME",cameriere);
         startActivity(intent);
     }
-
-
-
-
-
 
 }

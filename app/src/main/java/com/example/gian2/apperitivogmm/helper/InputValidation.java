@@ -8,7 +8,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 /**
- * Created by gian2 on 31/07/2018.
+ * Scopi:
+ * > controllare la validità dei dati immessi
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
 
 public class InputValidation {

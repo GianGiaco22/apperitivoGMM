@@ -14,10 +14,6 @@ import com.example.gian2.apperitivogmm.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by gian2 on 09/01/2019.
- */
-
 public class CustomPietanzaOrdinataAdapter extends BaseAdapter {
     public static ArrayList<EditPietanzaOrdinataModel> pietanzeOrdinate;
     private Context context;

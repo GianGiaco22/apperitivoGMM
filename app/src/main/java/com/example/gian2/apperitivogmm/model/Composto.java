@@ -1,9 +1,5 @@
 package com.example.gian2.apperitivogmm.model;
 
-/**
- * Created by gian2 on 16/01/2019.
- */
-
 public class Composto {
     private String pietanza;
     private int quantita;

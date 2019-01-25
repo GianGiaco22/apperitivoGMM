@@ -15,9 +15,12 @@ import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
 /**
- * Created by gian2 on 31/07/2018.
+ * Scopi:
+ * > registrare un nuovo profilo utente
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
-
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private final AppCompatActivity register= RegisterActivity.this;
@@ -43,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    //inizializza parte grafica
     private void initViews(){
         registrati_button=(Button) findViewById(R.id.registrati);
         username=(EditText) findViewById(R.id.usrnm);
@@ -51,17 +55,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         numtel=(EditText) findViewById(R.id.numtel);
         numtel.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-
     }
 
+
+    //inizializza i listeners dei bottoni
     private void initListeners(){
        registrati_button.setOnClickListener(this);
     }
 
+    //inizializzo gli oggetti
     private void initObjects(){
         databaseHelper=new DatabaseHelper(register);
         inputValidation=new InputValidation(register);
     }
+
     @Override
     public void onClick(View v) {
         if(v == registrati_button)
@@ -73,6 +80,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void postDataToSQLite(){
+        //i campi dell'iscrizione devono essere tutti compilati, altrimenti viene segnalato
+
         if(!inputValidation.isInputEditTextFilled(username)){
             Toast.makeText(getApplicationContext(),"Inserisci un valore valido per l'username!",Toast.LENGTH_LONG).show();
             return;
@@ -90,6 +99,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             return;
         }
 
+
+        //ultimo campo da controllare: se  stato riempito si procede la registrazione
+        //inserendo nella variabile del cameriere e poi nel database il valore immesso nei campi
         if(!databaseHelper.checkCameriere(username.getText().toString().trim())){
             cameriere.setUsername(username.getText().toString().trim());
             cameriere.setNome(nome.getText().toString().trim());

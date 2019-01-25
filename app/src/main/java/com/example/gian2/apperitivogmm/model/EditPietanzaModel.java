@@ -1,9 +1,5 @@
 package com.example.gian2.apperitivogmm.model;
 
-/**
- * Created by gian2 on 17/12/2018.
- */
-
 public class EditPietanzaModel {
     private String quantita;
     private String nomePietanza;

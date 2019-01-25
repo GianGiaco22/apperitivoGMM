@@ -16,7 +16,11 @@ import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 import java.util.ArrayList;
 
 /**
- * Created by gian2 on 02/08/2018.
+ * Scopi:
+ * > scegliere le pietanze richieste dal cliente e la relativa quantità
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
 
 public class OrdinaActivity extends AppCompatActivity implements View.OnClickListener{
@@ -74,17 +78,21 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(intent);
 
     }
-    //inizializzo viste
+
+    //inizializza parte grafica
     private void initViews(){
        lvmenu=(ListView) findViewById(R.id.menu);
        conferma=(Button) findViewById(R.id.conferma);
 
     }
-    //inizializo listeners
+
+
+    //inizializza i listeners dei bottoni
     private void initListeners(){
         conferma.setOnClickListener(this);
     }
-    //inizializzo oggetti
+
+    //inizializzo gli oggetti
     private void initObjects(){
         tavolo=getIntent().getIntExtra("Tavolo",0);
         utente=getIntent().getStringExtra("Cameriere_usrnm").toString().trim();
@@ -101,7 +109,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
                 cursor.moveToFirst();
 
                 String categoria_attuale="";
-                TextView[] categoria_vedi=new TextView[6];
+
                 //grafica scritte
                 for(int i=0; i<cursor.getCount(); i++){
                     if(!cursor.getString(3).equals(categoria_attuale)){
@@ -120,14 +128,5 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         }
         return lvmenu;
     }
-
-
-
-
-
-
-
-
-
 
 }

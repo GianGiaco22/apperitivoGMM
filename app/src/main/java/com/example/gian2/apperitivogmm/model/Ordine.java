@@ -1,11 +1,5 @@
 package com.example.gian2.apperitivogmm.model;
 
-import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
-
-/**
- * Created by gian2 on 02/08/2018.
- */
-
 public class Ordine {
 
     private  int codice;
@@ -13,9 +7,7 @@ public class Ordine {
     private String cameriere;
     private float conto;
 
-    public Ordine() {
-
-    }
+    public Ordine() {    } //costruttore
 
 
     public int getCodice() {

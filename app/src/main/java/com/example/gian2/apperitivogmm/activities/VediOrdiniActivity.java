@@ -15,6 +15,14 @@ import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
+
+/**
+ * Scopi:
+ * > visualizzare lo storico degli ordini del profilo corrente
+ * *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
+ */
 public class VediOrdiniActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseHelper databaseHelper;
@@ -42,14 +50,19 @@ public class VediOrdiniActivity extends AppCompatActivity implements View.OnClic
         startActivity(intent);
     }
 
+    //inizializza parte grafica
     private void InitViews(){
         linearLayoutVediordini=(LinearLayout) findViewById(R.id.vedi_ordini);
         vedi_ordini=(Button) findViewById(R.id.conferma);
 
     }
+
+    //inizializza i listeners dei bottoni
     private void InitListeners(){
         vedi_ordini.setOnClickListener(this);
     }
+
+    //inizializzo gli oggetti
     private void InitObjects(){
         databaseHelper=new DatabaseHelper(this);
         cameriere=new Cameriere();

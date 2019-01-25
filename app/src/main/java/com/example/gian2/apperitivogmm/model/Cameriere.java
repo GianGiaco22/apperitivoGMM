@@ -1,9 +1,5 @@
 package com.example.gian2.apperitivogmm.model;
 
-/**
- * Created by gian2 on 31/07/2018.
- */
-
 public class Cameriere {
 
     private String username;

@@ -13,10 +13,16 @@ import com.example.gian2.apperitivogmm.model.Tavolo;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
 /**
- * Created by gian2 on 31/07/2018.
+ * Scopi:
+ * > selezionare il tavolo per effettuare un ordine
+ * > accedere allo storico degli ordini effettuati
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
 
 public class CameriereActivity extends AppCompatActivity implements View.OnClickListener {
+   //dichiarazione dei Button relativi ai tavoli
     private AppCompatActivity cameriere_attivita= CameriereActivity.this;
     private TextView vedi_username;
     private Button tavolo1;
@@ -31,16 +37,18 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
     private Button tavolo10;
     private Button tavolo11;
     private Button tavolo12;
-    private Button vedi_ordini;
-    private DatabaseHelper databaseHelper;
-    private String usernameFromIntent;
+
+    private DatabaseHelper databaseHelper; //oggetto per le interazioni con il database
+    private String usernameFromIntent; //username del cameriere corrente
+    private Button vedi_ordini; //button che rimanda allo storico ordini
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         vedi_username=(TextView) findViewById(R.id.vedi);
-         usernameFromIntent=getIntent().getStringExtra("USERNAME");
+        usernameFromIntent=getIntent().getStringExtra("USERNAME");
         vedi_username.setText("Benvenuto "+usernameFromIntent+"\nseleziona il tavolo:");
 
         initViews();
@@ -55,10 +63,9 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
             t.setNumero(i);
             databaseHelper.addTavolo(t);
         }
-
-
     }
 
+    //inizializza parte grafica
     private void initViews(){
         vedi_username=(TextView)  findViewById(R.id.vedi);
         tavolo1=(Button) findViewById(R.id.tavolo1);
@@ -76,6 +83,7 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         vedi_ordini=(Button) findViewById(R.id.vedi_ordini);
     }
 
+    //inizializza i listeners dei bottoni
     private void initListeners(){
         tavolo1.setOnClickListener(this);
         tavolo2.setOnClickListener(this);
@@ -89,10 +97,12 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         tavolo10.setOnClickListener(this);
         tavolo11.setOnClickListener(this);
         tavolo12.setOnClickListener(this);
+
         vedi_ordini.setOnClickListener(this);
     }
 
-    private void initObjects(){
+    //inizializzo gli oggetti
+    private void initObjects(){//
         databaseHelper=new DatabaseHelper(cameriere_attivita);
 
     }
@@ -112,7 +122,6 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.tavolo3:
                 tavolo.setNumero(3);
-
                 ordina(tavolo);
                 break;
             case R.id.tavolo4:
@@ -172,10 +181,4 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         startActivity(intent);
 
     }
-
-
-
-
-
-
 }

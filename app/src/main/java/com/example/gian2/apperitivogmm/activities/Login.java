@@ -14,6 +14,15 @@ import com.example.gian2.apperitivogmm.R;
 import com.example.gian2.apperitivogmm.helper.InputValidation;
 import com.example.gian2.apperitivogmm.sql.DatabaseHelper;
 
+
+/**
+ * Scopi:
+ * > effettuare l'accesso al portale
+ * > accesso alla registrazione di un nuovo profilo
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
+ */
 public class Login extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity;
 
@@ -26,6 +35,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private EditText username;
     private InputValidation inputValidation;
     private DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +48,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         initObjects();
     }
 
-    //inizializzo parti del form
+    //inizializza parte grafica
     private void initViews(){
         SharedPreferences preferences=getPreferences(MODE_PRIVATE);
         aggiungi_profilo=(Button) findViewById(R.id.crea);
@@ -46,12 +56,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         username=(EditText) findViewById(R.id.username);
         String String_usrnm=preferences.getString("username",null);
     }
-    //inizializzo bottoni
+
+    //inizializza i listeners dei bottoni
     private void initListeners(){
         accesso.setOnClickListener(this);
         aggiungi_profilo.setOnClickListener(this);
     }
-    //inizializzo oggetti
+
+    //inizializzo gli oggetti
     private void initObjects(){
         databaseHelper=new DatabaseHelper(activity);
         inputValidation=new InputValidation(activity);

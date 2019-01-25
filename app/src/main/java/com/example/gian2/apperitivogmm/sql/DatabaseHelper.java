@@ -9,12 +9,13 @@ import com.example.gian2.apperitivogmm.model.Cameriere;
 import com.example.gian2.apperitivogmm.model.Ordine;
 import com.example.gian2.apperitivogmm.model.Tavolo;
 
-
-
 /**
- * Created by gian2 on 31/07/2018.
+ * Scopi:
+ * > gestire tutte le interazioni con il database
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
  */
-
 public class DatabaseHelper extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION=1 ;
     private static final String DATABASE_NAME="appgmm.db";
@@ -73,11 +74,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
             "  costo float not null,\n" +
             "  descrizione varchar(200) not null\n" +
             ")";
-
-
-
-
-
 
 
     @Override
@@ -154,8 +150,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 
        return  (int)db.insert("ordine",null,values);
-
-
     }
 
 
@@ -285,10 +279,3 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     }
-
-
-
-
-
-
-

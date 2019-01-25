@@ -14,10 +14,6 @@ import com.example.gian2.apperitivogmm.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by gian2 on 14/12/2018.
- */
-
 public class CustomPietanzaAdapter extends BaseAdapter {
 
     //affinchè tale array possa essere utilizzato in qualsiasi altra classe
@@ -115,8 +111,6 @@ public class CustomPietanzaAdapter extends BaseAdapter {
         protected TextView textViewDescrizione;
 
     }
-
-
 
 }
 

@@ -15,6 +15,14 @@ import com.example.gian2.apperitivogmm.model.CustomPietanzaOrdinataAdapter;
 import com.example.gian2.apperitivogmm.model.EditPietanzaOrdinataModel;
 import java.util.ArrayList;
 
+/**
+ * Scopi:
+ * > visualizzare il riepilogo dell'rdine prima della conferma
+ * > aggiungere eventuali modifiche
+ *
+ * @authors Gianluca Giacometti, Melissa Palazzo, Marco Bonavoglia
+ * @version 1.0
+ */
 public class ConfermaOrdineActivity extends AppCompatActivity implements View.OnClickListener {
 
     //tavolo possibile ordine
@@ -57,22 +65,22 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
             finish();
         }
 
-
-
-
-
     }
 
 
+    //inizializza parte grafica
     private void initViews(){
         invia_ordine=(Button) findViewById(R.id.conferma);
         listaPietanzaOrdinate=(ListView) findViewById(R.id.ordine_completo);
     }
+
+    //inizializza i listeners dei bottoni
     private void initListeners(){
         invia_ordine.setOnClickListener(this);
     }
 
 
+    //inizializzo gli oggetti
     private void initObjects(){
 
     }
@@ -93,7 +101,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
              }
         }
        //creo intent per passare a ContoActivity
-        Intent intent=new Intent(ConfermaOrdineActivity.this,ContoActivity.class);
+        Intent intent=new Intent(ConfermaOrdineActivity.this, ContoActivity.class);
         //passo i due conti alla prossima Activity
         intent.putExtra("conto_modifiche",conto_modifiche);
         intent.putExtra("conto_senza_modifiche",conto_senza_modifiche);
