@@ -39,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initViews();
         initListeners();
         initObjects();
+        getSupportActionBar().hide();
     }
 
 

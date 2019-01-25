@@ -53,6 +53,7 @@ public class OrdinaActivity extends AppCompatActivity implements View.OnClickLis
         initListeners();
         //inizializzo oggetti
         initObjects();
+        getSupportActionBar().hide();
 
         //creo il menu
         databaseHelper.createMenu();

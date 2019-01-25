@@ -59,6 +59,7 @@ public class ContoActivity extends AppCompatActivity implements View.OnClickList
         initListeners();
         //inizializzo oggetti
         initObjects();
+        getSupportActionBar().hide();
         //inserisco stringa per info dell'ordine
         info_ordine.setText("Ordine  del cameriere "+cameriere+" \nal tavolo "+tavolo);
         conto_modificheTextView.setText("Importo modifiche: € "+conto_modifiche);

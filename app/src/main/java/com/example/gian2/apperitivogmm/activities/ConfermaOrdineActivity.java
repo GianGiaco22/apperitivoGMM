@@ -43,6 +43,7 @@ public class ConfermaOrdineActivity extends AppCompatActivity implements View.On
         initListeners();
         //inizializzo oggetti
         initObjects();
+        getSupportActionBar().hide();
 
         //ottengo lista componenti grafici relativi a pietanze ordinate
         pietanzaView=getPietanzeOrdinate();

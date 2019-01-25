@@ -41,11 +41,14 @@ public class CameriereActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_user);
         vedi_username=(TextView) findViewById(R.id.vedi);
          usernameFromIntent=getIntent().getStringExtra("USERNAME");
-        vedi_username.setText(" Benvenuto "+usernameFromIntent+", seleziona il tavolo :");
+        vedi_username.setText("Benvenuto "+usernameFromIntent+"\nseleziona il tavolo:");
 
         initViews();
         initListeners();
         initObjects();
+
+        getSupportActionBar().hide();
+
         for (int i=1;i<=12;i++){
             Tavolo t=new Tavolo();
 
